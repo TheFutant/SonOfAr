@@ -1,0 +1,16 @@
+services:
+  son-of-ar:
+    container_name: son-of-ar
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: son-of-ar:latest
+    restart: unless-stopped
+    ports:
+      - "${SON_OF_AR_PORT:-8090}:80"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s

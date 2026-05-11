@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  background-color: #050403;
+  color: #e4dfd9;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, Cambria, "Times New Roman", serif;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: contain;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* iOS-safe-area aware bottom padding helper */
+.pb-safe {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+.pt-safe {
+  padding-top: max(0.75rem, env(safe-area-inset-top));
+}
+
+/* tactile choice press effect */
+.choice-press:active {
+  transform: translateY(1px) scale(0.997);
+}
+
+/* subtle scroll fade for long bodies */
+.story-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #4a423b transparent;
+}
+.story-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.story-scroll::-webkit-scrollbar-thumb {
+  background-color: #4a423b;
+  border-radius: 3px;
+}
