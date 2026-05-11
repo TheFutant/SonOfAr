@@ -9,7 +9,7 @@ interface Props {
 
 const ALL_ENDINGS: EndingId[] = [
   "myth_of_ar",
-  "man_named_maebie",
+  "two_of_them",
   "public_servant_of_fire",
   "carl_wins",
 ];

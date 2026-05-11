@@ -15,7 +15,7 @@ export type CodeKey =
 
 export type EndingId =
   | "myth_of_ar"
-  | "man_named_maebie"
+  | "two_of_them"
   | "public_servant_of_fire"
   | "carl_wins";
 
@@ -108,7 +108,7 @@ export const CODE_LABELS: Record<CodeKey, string> = {
 
 export const ENDING_TITLES: Record<EndingId, string> = {
   myth_of_ar: "The Myth of Ar",
-  man_named_maebie: "The Man Named Maebie",
+  two_of_them: "The Two of Them",
   public_servant_of_fire: "Public Servant of Fire",
   carl_wins: "Carl from Insurance Wins",
 };
