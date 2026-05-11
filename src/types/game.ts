@@ -21,16 +21,16 @@ export type EndingId =
 
 export interface SceneEffect {
   stats?: Partial<Stats>;
-  addItems?: string[];
-  removeItems?: string[];
+  addItems?: readonly string[];
+  removeItems?: readonly string[];
   setCode?: CodeKey;
   unlockEnding?: EndingId;
   setFlag?: { key: string; value: boolean };
 }
 
 export interface Condition {
-  hasItems?: string[];
-  notHasItems?: string[];
+  hasItems?: readonly string[];
+  notHasItems?: readonly string[];
   minStats?: Partial<Stats>;
   maxStats?: Partial<Stats>;
   chosenCode?: CodeKey;
@@ -57,7 +57,7 @@ export interface Scene {
   editorNote?: string;
   writersRoomNote?: string;
   onEnter?: SceneEffect;
-  choices: Choice[];
+  choices: readonly Choice[];
   isEnding?: boolean;
   endingId?: EndingId;
 }

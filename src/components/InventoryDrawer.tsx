@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { ITEM_FLAVOR, ITEM_LABELS } from "../data/story";
+import { ITEM_FLAVOR, ITEM_LABELS, type ItemId } from "../data/items";
 import { CODE_LABELS, CodeKey } from "../types/game";
 
 interface Props {
@@ -69,21 +69,24 @@ export function InventoryDrawer({ open, onClose, inventory, chosenCode }: Props)
               </p>
             ) : (
               <ul className="space-y-2">
-                {inventory.map((id) => (
-                  <li
-                    key={id}
-                    className="rounded-lg border border-ash-600/60 bg-ash-800/60 px-3 py-2"
-                  >
-                    <div className="text-ash-50 font-semibold">
-                      {ITEM_LABELS[id] ?? id}
-                    </div>
-                    {ITEM_FLAVOR[id] && (
-                      <div className="mt-1 text-sm text-ash-200/90">
-                        {ITEM_FLAVOR[id]}
+                {inventory.map((rawId) => {
+                  const id = rawId as ItemId;
+                  return (
+                    <li
+                      key={rawId}
+                      className="rounded-lg border border-ash-600/60 bg-ash-800/60 px-3 py-2"
+                    >
+                      <div className="text-ash-50 font-semibold">
+                        {ITEM_LABELS[id] ?? rawId}
                       </div>
-                    )}
-                  </li>
-                ))}
+                      {ITEM_FLAVOR[id] && (
+                        <div className="mt-1 text-sm text-ash-200/90">
+                          {ITEM_FLAVOR[id]}
+                        </div>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             )}
           </div>

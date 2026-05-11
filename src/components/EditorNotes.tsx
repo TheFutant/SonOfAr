@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { EDITOR_COMPLAINTS } from "../data/story";
+import { EDITOR_COMPLAINTS } from "../data/editor-complaints";
 
 interface Props {
   note?: string;

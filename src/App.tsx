@@ -1,20 +1,12 @@
 import { useCallback, useEffect, useMemo, useReducer, useState } from "react";
 import { getScene } from "./data/story";
-import {
-  Choice,
-  GameState,
-  StatKey,
-} from "./types/game";
-import {
-  STARTING_SCENE_ID,
-  chooseChoice,
-  enterScene,
-  newGame,
-} from "./utils/gameEngine";
+import { init, reducer } from "./state/reducer";
+import { Choice, StatKey } from "./types/game";
 import { clearSave, loadGame, saveGame } from "./utils/storage";
 import { playClick } from "./utils/sound";
 import { EmberBackground } from "./components/EmberBackground";
 import { TitleScreen } from "./components/TitleScreen";
+import { TopBar } from "./components/TopBar";
 import { SceneView } from "./components/SceneView";
 import { StatsPanel } from "./components/StatsPanel";
 import { StatsSheet } from "./components/StatsSheet";
@@ -24,45 +16,9 @@ import { EndingCard } from "./components/EndingCard";
 
 type Screen = "title" | "play";
 
-type Action =
-  | { type: "choose"; choice: Choice }
-  | { type: "load"; state: GameState }
-  | { type: "new" }
-  | { type: "set-flag"; key: keyof Pick<GameState, "chaosMode" | "writersRoomMode" | "soundOn">; value: boolean };
-
-function reducer(state: GameState, action: Action): GameState {
-  switch (action.type) {
-    case "choose": {
-      return chooseChoice(state, action.choice, getScene);
-    }
-    case "load":
-      return action.state;
-    case "new": {
-      // Preserve completed endings and toggles across resets.
-      const fresh = enterScene(newGame(), getScene(STARTING_SCENE_ID));
-      return {
-        ...fresh,
-        completedEndings: state.completedEndings,
-        chaosMode: state.chaosMode,
-        writersRoomMode: state.writersRoomMode,
-        soundOn: state.soundOn,
-      };
-    }
-    case "set-flag":
-      return { ...state, [action.key]: action.value };
-  }
-}
-
-function init(): GameState {
-  const saved = loadGame();
-  return saved ?? newGame();
-}
-
 export default function App() {
   const [state, dispatch] = useReducer(reducer, undefined, init);
-  const [screen, setScreen] = useState<Screen>(() =>
-    loadGame() ? "title" : "title",
-  );
+  const [screen, setScreen] = useState<Screen>("title");
   const [inventoryOpen, setInventoryOpen] = useState(false);
   const [statsOpen, setStatsOpen] = useState(false);
   const [statsFocused, setStatsFocused] = useState<StatKey | null>(null);
@@ -192,49 +148,6 @@ export default function App() {
         stats={state.stats}
         focused={statsFocused}
       />
-    </div>
-  );
-}
-
-function TopBar({
-  chapter,
-  onTitle,
-  onOpenInventory,
-  inventoryCount,
-}: {
-  chapter: string;
-  onTitle: () => void;
-  onOpenInventory: () => void;
-  inventoryCount: number;
-}) {
-  return (
-    <div className="sticky top-0 z-20 -mx-4 px-4 py-2 backdrop-blur bg-ash-950/70 border-b border-ash-700/60">
-      <div className="flex items-center justify-between gap-3">
-        <button
-          onClick={onTitle}
-          aria-label="Back to title"
-          className="text-ash-200 hover:text-ash-50 text-sm px-2 py-1"
-        >
-          ←
-        </button>
-        <div className="flex-1 text-center truncate">
-          <div className="text-[10px] uppercase tracking-[0.24em] text-ember-500/90">
-            Chapter
-          </div>
-          <div className="text-sm text-ash-100 truncate">{chapter}</div>
-        </div>
-        <button
-          onClick={onOpenInventory}
-          className="relative rounded-lg border border-ash-600/70 bg-ash-800/70 px-3 py-1.5 text-sm text-ash-100"
-        >
-          Pockets
-          {inventoryCount > 0 && (
-            <span className="ml-1 inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-ember-700/70 px-1 text-xs text-ash-50">
-              {inventoryCount}
-            </span>
-          )}
-        </button>
-      </div>
     </div>
   );
 }

@@ -9,7 +9,7 @@ import {
   StatKey,
 } from "../types/game";
 
-export const STARTING_SCENE_ID = "ash_wake_1";
+import { STARTING_SCENE_ID } from "../data/story";
 
 export function newGame(): GameState {
   return {
