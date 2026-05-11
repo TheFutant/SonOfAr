@@ -3,6 +3,7 @@ import { getScene } from "./data/story";
 import {
   Choice,
   GameState,
+  StatKey,
 } from "./types/game";
 import {
   STARTING_SCENE_ID,
@@ -16,6 +17,7 @@ import { EmberBackground } from "./components/EmberBackground";
 import { TitleScreen } from "./components/TitleScreen";
 import { SceneView } from "./components/SceneView";
 import { StatsPanel } from "./components/StatsPanel";
+import { StatsSheet } from "./components/StatsSheet";
 import { InventoryDrawer } from "./components/InventoryDrawer";
 import { SaveControls } from "./components/SaveControls";
 import { EndingCard } from "./components/EndingCard";
@@ -62,6 +64,8 @@ export default function App() {
     loadGame() ? "title" : "title",
   );
   const [inventoryOpen, setInventoryOpen] = useState(false);
+  const [statsOpen, setStatsOpen] = useState(false);
+  const [statsFocused, setStatsFocused] = useState<StatKey | null>(null);
 
   const scene = useMemo(() => getScene(state.currentSceneId), [state.currentSceneId]);
 
@@ -74,8 +78,8 @@ export default function App() {
     (choice: Choice) => {
       playClick(state.soundOn);
       dispatch({ type: "choose", choice });
-      // close inventory drawer if open
       setInventoryOpen(false);
+      setStatsOpen(false);
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
     [state.soundOn],
@@ -133,12 +137,23 @@ export default function App() {
           <TopBar
             chapter={scene.chapter}
             onTitle={onTitle}
-            onOpenInventory={() => setInventoryOpen(true)}
+            onOpenInventory={() => {
+              setStatsOpen(false);
+              setInventoryOpen(true);
+            }}
             inventoryCount={state.inventory.length}
           />
 
           <div className="mt-3">
-            <StatsPanel stats={state.stats} compact />
+            <StatsPanel
+              stats={state.stats}
+              onOpenDetails={(k) => {
+                playClick(state.soundOn);
+                setInventoryOpen(false);
+                setStatsFocused(k ?? null);
+                setStatsOpen(true);
+              }}
+            />
           </div>
 
           <main className="mt-5">
@@ -169,6 +184,13 @@ export default function App() {
         onClose={() => setInventoryOpen(false)}
         inventory={state.inventory}
         chosenCode={state.chosenCode}
+      />
+
+      <StatsSheet
+        open={statsOpen}
+        onClose={() => setStatsOpen(false)}
+        stats={state.stats}
+        focused={statsFocused}
       />
     </div>
   );

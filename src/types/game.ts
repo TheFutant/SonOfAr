@@ -99,6 +99,27 @@ export const STAT_TINTS: Record<StatKey, string> = {
   editorApproval: "text-amber-200",
 };
 
+export const STAT_CODES: Record<StatKey, string> = {
+  heat: "HT",
+  humanity: "HU",
+  evidence: "EV",
+  chaos: "CH",
+  editorApproval: "ED",
+};
+
+export const STAT_DESCRIPTIONS: Record<StatKey, string> = {
+  heat:
+    "Destructive force, building. Rises when you intimidate, borrow heat from suspiciously flammable trash cans, or stand near things that are about to ignite.",
+  humanity:
+    "Empathy and restraint. Rises when you protect, decline to escalate, and treat people as people — including, especially, Maebie.",
+  evidence:
+    "Truth, uncovered. Rises when you read the file, check the comma, and follow the thing that didn't add up.",
+  chaos:
+    "Absurdity and collateral weirdness. Rises with bad jokes, unaccounted-for fires, and Carl-shaped misunderstandings.",
+  editorApproval:
+    "Whether the Editor thinks the story is coherent and properly punctuated. Rises with serial commas, brand consistency, and tasteful kerning. Falls when you sign a list of three.",
+};
+
 export const CODE_LABELS: Record<CodeKey, string> = {
   never_start: "Never start the fire.",
   never_burn_home: "Never burn a home with people inside.",
