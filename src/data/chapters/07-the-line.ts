@@ -1,15 +1,15 @@
 import type { Scene } from "../../types/game";
 
-export const chapter6 = [
+export const chapter7 = [
   {
     id: "the_line_1",
     title: "The Line",
-    chapter: "VI · The Line",
+    chapter: "VII · The Line",
     body: `You sit, eventually, on a curb that is colder than the rest of the curb.
 
 The Editor takes off her glasses. She looks tired in a way only people who actually love what they're protecting can be tired.
 
-"Every man who burns," she says, "is one decision away from a man who only stands near burning. The line is yours, not mine. But it's load-bearing. Pick one."`,
+"Every man who burns," she says, "is one decision away from a man who only stands near burning. Three siblings. Three roads. Three readings of the same mark. The line is yours, not mine. But it's load-bearing. Pick one."`,
     editorNote:
       "I am, for the next four lines, declining to be funny. This is the spine of the story. Pick one.",
     choices: [

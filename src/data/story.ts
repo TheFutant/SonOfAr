@@ -2,10 +2,11 @@ import type { Scene } from "../types/game";
 import { chapter1 } from "./chapters/01-ash-wake";
 import { chapter2 } from "./chapters/02-maebie";
 import { chapter3 } from "./chapters/03-public-works";
-import { chapter4 } from "./chapters/04-big-dons";
-import { chapter5 } from "./chapters/05-carl";
-import { chapter6 } from "./chapters/06-the-line";
-import { chapter7 } from "./chapters/07-legacy";
+import { chapter4 } from "./chapters/04-third-stair";
+import { chapter5 } from "./chapters/05-three-marks";
+import { chapter6 } from "./chapters/06-carl";
+import { chapter7 } from "./chapters/07-the-line";
+import { chapter8 } from "./chapters/08-legacy";
 import { validateStory } from "./validate";
 
 const chapters = [
@@ -16,6 +17,7 @@ const chapters = [
   chapter5,
   chapter6,
   chapter7,
+  chapter8,
 ] as const;
 
 export type SceneId = (typeof chapters)[number][number]["id"];

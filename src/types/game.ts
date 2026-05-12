@@ -17,7 +17,10 @@ export type EndingId =
   | "myth_of_ar"
   | "two_of_them"
   | "public_servant_of_fire"
-  | "carl_wins";
+  | "carl_wins"
+  | "the_monster"
+  | "editors_ending"
+  | "rain_reveals";
 
 export interface SceneEffect {
   stats?: Partial<Stats>;
@@ -25,7 +28,7 @@ export interface SceneEffect {
   removeItems?: readonly string[];
   setCode?: CodeKey;
   unlockEnding?: EndingId;
-  setFlag?: { key: string; value: boolean };
+  setFlags?: readonly { key: string; value: boolean }[];
 }
 
 export interface Condition {
@@ -132,4 +135,7 @@ export const ENDING_TITLES: Record<EndingId, string> = {
   two_of_them: "The Two of Them",
   public_servant_of_fire: "Public Servant of Fire",
   carl_wins: "Carl from Insurance Wins",
+  the_monster: "The Monster",
+  editors_ending: "The Editor's Ending",
+  rain_reveals: "Rain Reveals",
 };

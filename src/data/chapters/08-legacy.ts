@@ -1,11 +1,11 @@
 import type { Scene } from "../../types/game";
 import { ITEMS } from "../items";
 
-export const chapter7 = [
+export const chapter8 = [
   {
     id: "legacy_1",
     title: "Legacy Written in Ash",
-    chapter: "VII · Legacy Written in Ash",
+    chapter: "VIII · Legacy Written in Ash",
     body: `By morning, three things are true:
 
 — Carl from Insurance has filed something somewhere,
@@ -16,7 +16,7 @@ You stand at the edge of a quiet block. There's a burned plate on the curb. Ther
 
 Legacy is written in ash. Blood remembers. Destiny endures. Pick the line, and walk it.`,
     editorNote:
-      "Four roads forward. Each one is honest. None of them is clean. Choose the one your code can live with.",
+      "The roads forward have multiplied since we last counted. Some of them only open if someone bothered to read the room. Each is honest. None of them is clean. Choose the one your code can live with.",
     choices: [
       {
         id: "end_myth",
@@ -37,6 +37,37 @@ Legacy is written in ash. Blood remembers. Destiny endures. Pick the line, and w
         label: "Sign on. Officially. Sanitation, with flair.",
         next: "ending_servant",
         requires: { minStats: { humanity: 2, editorApproval: 2 } },
+        showIfLocked: true,
+      },
+      {
+        id: "end_rain",
+        label: "Let her bring the rain. Let it do the telling.",
+        next: "ending_rain",
+        requires: {
+          flag: { key: "ranya_trust_high", value: true },
+          minStats: { humanity: 2 },
+        },
+        showIfLocked: true,
+      },
+      {
+        id: "end_editor",
+        label: "Hand the manuscript back. Let the Editor close it.",
+        next: "ending_editor",
+        requires: {
+          flag: { key: "saved_the_story", value: true },
+          minStats: { editorApproval: 4 },
+        },
+        showIfLocked: true,
+      },
+      {
+        id: "end_monster",
+        label: "Become the thing he warned you about.",
+        next: "ending_monster",
+        requires: {
+          flag: { key: "mason_sees_lost", value: true },
+          minStats: { heat: 4 },
+          maxStats: { humanity: 0 },
+        },
         showIfLocked: true,
       },
       {
@@ -109,6 +140,84 @@ There is always heat in the burn barrel. You use it on paperwork, which is, of a
     choices: [
       {
         id: "servant_to_title",
+        label: "Roll credits.",
+        next: "ash_wake_1",
+      },
+    ],
+  },
+  {
+    id: "ending_rain",
+    title: "Rain Reveals",
+    chapter: "Ending · Rain Reveals",
+    body: `It rains.
+
+Not on you. Near you. On the flat field of ash where the third name was, and the third name was, in the rain's careful telling, never yours — it was a name someone burned into the list so that you would walk into a room and answer to it.
+
+You don't.
+
+Ranya lowers her hand. The rain stops. The truth stays out, like a stone you can't put back. Mason reads it from a distance, and his face does the small private thing his sister's face does, and he closes his book.
+
+You don't disappear. You don't burn a building down. You don't sign a thing. You walk away with a woman who reads what fire was too proud to say, and the story, for once, is told by the rain.`,
+    editorNote:
+      "Fire remembers. Rain reveals. Print that on the back of the cover. We can argue about font later. (Caslon. Obviously Caslon.)",
+    isEnding: true,
+    endingId: "rain_reveals",
+    onEnter: { unlockEnding: "rain_reveals" },
+    choices: [
+      {
+        id: "rain_to_title",
+        label: "Roll credits.",
+        next: "ash_wake_1",
+      },
+    ],
+  },
+  {
+    id: "ending_editor",
+    title: "The Editor's Ending",
+    chapter: "Ending · The Editor's Ending",
+    body: `You hand her the manuscript. You do not say "manuscript." You say, "Take it." She takes it.
+
+The Editor sets it on the table at the Third Stair, three staircases above her chair, and reads it once, slowly, in the way only people who actually love what they're protecting can read.
+
+She makes seven margin notes. She fixes two commas. She lets one joke stand that she should have cut, because the joke meant something the writer didn't know he meant.
+
+She closes the file.
+
+You live. The story lives. They live, frankly, longer than either of you would have expected.
+
+Somewhere, in a different file, on a different desk, somebody writes, simply, in calm serif type: "Set in Caslon, please."`,
+    editorNote:
+      "Stories survive when someone cares enough to revise them. Not rewrite. Revise. There is a difference. I have, today, made it.",
+    isEnding: true,
+    endingId: "editors_ending",
+    onEnter: { unlockEnding: "editors_ending" },
+    choices: [
+      {
+        id: "editor_to_title",
+        label: "Roll credits.",
+        next: "ash_wake_1",
+      },
+    ],
+  },
+  {
+    id: "ending_monster",
+    title: "The Monster",
+    chapter: "Ending · The Monster",
+    body: `Mason told you, once, on a broken column at a fork in a road, that fire without structure is destruction.
+
+You decide, today, that he was right about the noun and wrong about whether it's a problem.
+
+You burn a thing that did not need burning. Then another. Then the third one, because three is the number that makes a pattern, and you wanted a pattern. The block remembers. The next block hears about it. Carl from Insurance, somewhere in his neat little office, opens a new folder with your name on the tab and goes home, on time, smiling.
+
+The Editor stops correcting you. That is the worst thing that happens to you, and you will not realize it for years.`,
+    editorNote:
+      "I do not, today, have a margin note. That is also a margin note.",
+    isEnding: true,
+    endingId: "the_monster",
+    onEnter: { unlockEnding: "the_monster" },
+    choices: [
+      {
+        id: "monster_to_title",
         label: "Roll credits.",
         next: "ash_wake_1",
       },

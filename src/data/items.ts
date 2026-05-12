@@ -11,6 +11,11 @@ export const ITEMS = {
   fire_marshal_warning: "fire_marshal_warning",
   warranty_scroll: "warranty_scroll",
   burned_plate: "burned_plate",
+  three_marked_relic: "three_marked_relic",
+  rain_stained_tablet: "rain_stained_tablet",
+  masons_rulebook: "masons_rulebook",
+  pearsons_diagram: "pearsons_diagram",
+  burned_story_fragment: "burned_story_fragment",
 } as const;
 
 export type ItemId = (typeof ITEMS)[keyof typeof ITEMS];
@@ -24,6 +29,11 @@ export const ITEM_LABELS: Record<ItemId, string> = {
   fire_marshal_warning: "Fire Marshal Warning",
   warranty_scroll: "Warranty Scroll",
   burned_plate: "Burned License Plate (NEWSTRT)",
+  three_marked_relic: "Three-Marked Relic",
+  rain_stained_tablet: "Rain-Stained Tablet",
+  masons_rulebook: "Mason's Rulebook",
+  pearsons_diagram: "Sister Pearson's Diagram",
+  burned_story_fragment: "Burned Story Fragment",
 };
 
 export const ITEM_FLAVOR: Record<ItemId, string> = {
@@ -43,4 +53,14 @@ export const ITEM_FLAVOR: Record<ItemId, string> = {
     "Rolled, ribboned, and fully expired. Carl from Insurance keeps mailing them anyway.",
   burned_plate:
     "License plate, edges blackened. It reads 'NEWSTRT.' Someone is starting something.",
+  three_marked_relic:
+    "An ash-covered tablet, broken at one corner. Three symbols are burned into it in a tidy row — a flame, a spiral, and something the Editor will not name out loud.",
+  rain_stained_tablet:
+    "A flat stone with writing only visible when wet. Ranya rinsed it once and the ink came up like a bruise.",
+  masons_rulebook:
+    "A small bound volume, leather, pristine. Tabs in three colors. The footnotes argue with each other politely.",
+  pearsons_diagram:
+    "A folded paper diagram. Proton, neutron, electron, drawn in calm hand. Beneath, in the same hand: 'or whatever you'd like to call them.'",
+  burned_story_fragment:
+    "A scrap of paper, edges scorched. One legible line: 'and then he chose, again, the third thing.'",
 };

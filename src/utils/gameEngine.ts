@@ -60,8 +60,10 @@ export function applyEffect(state: GameState, effect?: SceneEffect): GameState {
     }
   }
 
-  if (effect.setFlag) {
-    next.flags = { ...next.flags, [effect.setFlag.key]: effect.setFlag.value };
+  if (effect.setFlags?.length) {
+    const flags = { ...next.flags };
+    for (const f of effect.setFlags) flags[f.key] = f.value;
+    next.flags = flags;
   }
 
   return next;

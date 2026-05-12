@@ -73,9 +73,11 @@ The tenant looks at you the way people look at unexplained weather.`,
 
 The letters are masterpieces of polite menace. Each one cites a clause that doesn't exist. Each one is signed with a flourish.
 
+Beneath the Carl letters: a single architectural drawing, neat, foundation-level, signed in a hand that is much, much tidier — Mason. The tenant catches your eye, says nothing, and slides the drawing back under the folder.
+
 You feel the back of your neck warm. Not heat — recognition.`,
     editorNote:
-      'Carl from Insurance signs "Best," with a comma. Use it against him.',
+      'Carl from Insurance signs "Best," with a comma. The other one signs his foundation drawings. Note the brothers in a list. Note the missing third. We will get there.',
     choices: [
       {
         id: "pw_take_laptop",
@@ -145,8 +147,8 @@ You should probably go somewhere they can't find you yet.`,
     choices: [
       {
         id: "to_chapter_4",
-        label: "Head for Big Don's.",
-        next: "big_dons_1",
+        label: "Head for the Third Stair.",
+        next: "third_stair_1",
       },
     ],
   },
