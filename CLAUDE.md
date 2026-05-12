@@ -40,7 +40,7 @@ The site is an installable PWA. `vite-plugin-pwa` (configured in `vite.config.ts
 
 ## Architecture
 
-**Story is data, not code.** Scenes live in `src/data/chapters/01-ash-wake.ts` through `07-legacy.ts`, one file per chapter. Items are in `src/data/items.ts`. `src/data/story.ts` is the combiner — it imports all chapters, derives the `SceneId` union type from the literal scene-id tuples, runs the content validator at module load, and exports `getScene` + `STARTING_SCENE_ID`. To add a scene, append to the relevant chapter file; the validator will fail loudly on broken refs at the next dev/prod boot.
+**Story is data, not code.** Scenes live in `src/data/chapters/01-ash-wake.ts` through `08-legacy.ts` (eight chapters total: Ash Wake, Maebie, Public Works, The Third Stair, Three Marks, The Insurance Man, The Line, Legacy). Items are in `src/data/items.ts`. `src/data/story.ts` is the combiner — it imports all chapters, derives the `SceneId` union type from the literal scene-id tuples, runs the content validator at module load, and exports `getScene` + `STARTING_SCENE_ID`. To add a scene, append to the relevant chapter file; the validator will fail loudly on broken refs at the next dev/prod boot.
 
 Each chapter file is written as `as const satisfies readonly Scene[]` so scene-id literals are preserved through the combiner. This is what makes `SceneId = (typeof chapters)[number][number]["id"]` resolve to the union of all literal ids in `src/data/story.ts`.
 
@@ -59,6 +59,8 @@ Each `Scene` declares `body`, optional `editorNote` (collapsible Editor panel) a
 
 Items use canonical snake_case IDs in `src/data/items.ts` (`ITEMS`, with `ItemId` derived from it); user-facing names and flavor are in `ITEM_LABELS` / `ITEM_FLAVOR`. `Choice.effects.addItems`/`removeItems` and `Condition.hasItems`/`notHasItems` accept `readonly string[]`, but the validator checks every referenced id against `ITEMS` at module load. Stats are `heat | humanity | evidence | chaos | editorApproval`. Codes (`CodeKey`) are vow choices that gate certain branches.
 
+Relationships and narrative branches are tracked via `GameState.flags` (a `Record<string, boolean>`), not new stats — keeps the StatsPanel UI uncluttered. Effects set them via `SceneEffect.setFlags: readonly { key, value }[]` (an array so one choice can pivot multiple flags at once); conditions match a single flag via `Condition.flag`. Flag keys currently in use across the story include `leans_vengeance/protection/mystery`, `mason_sees_lost/amused/sees_redeemable/listens`, `pearson_faith/science/story/refuse`, `ranya_trust`, `ranya_trust_high`, `saved_the_story`, `interpret_science/faith/coincidence/manipulation`, `fixed_carl_comma`. Add new keys freely — they're stringly-typed by design.
+
 `Choice.next` is intentionally typed as `string` (not `SceneId`) — the schema can't reference `SceneId` without circularity, so the validator carries that load.
 
 ### UI
@@ -67,4 +69,9 @@ Mobile-first single-page React + Tailwind. Theme palette: custom `ash` (near-bla
 
 ## Story canon
 
-The dog is **Maebie** — alive, a partner. Never "Bailey." There is no childhood-fire / trauma origin in Arson's backstory; do not introduce one. See `project_maebie_dog_name.md` in auto-memory for the full note.
+- **The dog is Maebie** — alive, a partner. Never "Bailey." There is no childhood-fire / trauma origin in Arson's backstory; do not introduce one.
+- **The safehouse is The Third Stair**, not "Big Don's." The old name was removed wholesale — no callbacks, no jokes, no references. The Third Stair is mythic-cabin / writers'-room flavor: impossible architecture, three staircases on the top floor, self-tending, no host character.
+- **The three siblings are Arson, Mason, and Sister Pearson.** The recurring "three" motif (three siblings, three roads, three readings of the same mark, proton/neutron/electron, etc.) is intentional and load-bearing across Chapters V and VII — preserve it when editing. Mason is the structure/order antagonist sibling; Sister Pearson is the science/faith/story scholar.
+- **Ranya makes it rain — quietly, not like Storm.** Her power is subtle: rain that reveals hidden writing in ash, cools fire, exposes truth. Never escalate her into spectacular weather; the brief is explicit that "rain reveals" is the emotional counterweight to "fire remembers."
+
+See auto-memory for the canonical notes — these aren't suggestions, they're enforcement rules from prior conversations.
