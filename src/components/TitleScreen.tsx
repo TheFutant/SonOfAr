@@ -39,19 +39,31 @@ export function TitleScreen({
 
         <div className="mt-10 w-full space-y-3">
           {hasSave && (
-            <button
-              onClick={onContinue}
-              className="choice-press w-full rounded-xl bg-ember-700/40 border border-ember-600/70 px-5 py-4 text-ash-50 text-lg hover:bg-ember-700/55"
-            >
-              Continue
-            </button>
+            <div className="space-y-1">
+              <button
+                onClick={onContinue}
+                className="choice-press w-full rounded-xl bg-ember-700/40 border border-ember-600/70 px-5 py-4 text-ash-50 text-lg hover:bg-ember-700/55"
+              >
+                Continue
+              </button>
+              <p className="text-xs italic text-ash-300/80 text-center">
+                Picks up where you left off — new chapters wait past Ash Wake.
+              </p>
+            </div>
           )}
-          <button
-            onClick={onNewGame}
-            className="choice-press w-full rounded-xl border border-ash-500/70 bg-ash-800/70 px-5 py-4 text-ash-50 text-lg hover:border-ember-500/70"
-          >
-            {hasSave ? "Start over" : "Begin"}
-          </button>
+          <div className="space-y-1">
+            <button
+              onClick={onNewGame}
+              className="choice-press w-full rounded-xl border border-ash-500/70 bg-ash-800/70 px-5 py-4 text-ash-50 text-lg hover:border-ember-500/70"
+            >
+              {hasSave ? "Start over" : "Begin"}
+            </button>
+            {hasSave && (
+              <p className="text-xs italic text-ash-300/80 text-center">
+                Resets the story. Discovered endings stay unlocked.
+              </p>
+            )}
+          </div>
         </div>
 
         <div className="mt-10 w-full">
