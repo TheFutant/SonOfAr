@@ -13,7 +13,18 @@ npm run typecheck    # tsc -b --noEmit
 
 No linter, no test suite. `npm run build` is the type-correctness gate.
 
-Container deploy: `docker compose up -d --build` (multi-stage Node 20 → nginx, host port `SON_OF_AR_PORT` default `8090`, healthcheck at `/healthz`).
+Local container run: `docker compose up -d --build` (multi-stage Node 20 → nginx, host port `SON_OF_AR_PORT` default `8090`, healthcheck at `/healthz`).
+
+## Deploy
+
+Live at **https://sonofar.fly.dev/** on Fly.io.
+
+- Config: `fly.toml` (app `sonofar`, primary region `ord`, shared-cpu-1x / 1GB, internal port 80, `force_https`, auto-stop/auto-start so idle machines cost nothing).
+- Build: Fly's builders use the same `Dockerfile` as local — no separate prod Dockerfile.
+- Redeploy: `flyctl deploy` from the repo root (flyctl is installed at `~/.fly/bin/flyctl`).
+- Logs / status / SSH: `flyctl logs`, `flyctl status`, `flyctl ssh console`.
+
+Tailscale was explored as an alternative but isn't used — Fly was the simpler path for a public test URL.
 
 ## Architecture
 
