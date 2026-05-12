@@ -13,6 +13,8 @@ npm run typecheck    # tsc -b --noEmit
 
 No linter, no test suite. `npm run build` is the type-correctness gate.
 
+The build script prefixes `vite build` with `NODE_OPTIONS=--experimental-global-webcrypto` to work around a workbox dep that needs `globalThis.crypto` on Node 18. No-op on Node 19+; Fly's `node:20-alpine` builder doesn't need it but isn't harmed.
+
 Local container run: `docker compose up -d --build` (multi-stage Node 20 → nginx, host port `SON_OF_AR_PORT` default `8090`, healthcheck at `/healthz`).
 
 ## Deploy
@@ -25,6 +27,16 @@ Live at **https://sonofar.fly.dev/** on Fly.io.
 - Logs / status / SSH: `flyctl logs`, `flyctl status`, `flyctl ssh console`.
 
 Tailscale was explored as an alternative but isn't used — Fly was the simpler path for a public test URL.
+
+## PWA
+
+The site is an installable PWA. `vite-plugin-pwa` (configured in `vite.config.ts`) generates the manifest and a Workbox service worker at build time.
+
+- **Manifest** values (name, theme/bg color `#0b0908`, `display: standalone`, `orientation: portrait`, icon list) live in the plugin config in `vite.config.ts`. Output is `dist/manifest.webmanifest`; the plugin auto-injects `<link rel="manifest">` into the built `index.html`.
+- **Service worker** uses `registerType: "autoUpdate"` — registered from `src/main.tsx` via `virtual:pwa-register`. Precaches the JS/CSS/HTML/PNG bundle so the app works fully offline once installed; saves continue to live in `localStorage`. Updates ship on the next page load with no user prompt.
+- **Icons** ship from `public/icons/`. Master 1024×1024 sources live outside the build at `assets/icons/source-any.png` (tight face crop) and `assets/icons/source-maskable.png` (face shrunk to ~80% with `#0b0908` padding so Android adaptive-icon masking doesn't clip the focal point). Regenerate the `public/icons/*.png` size variants from the masters with `python3 scripts/build-pwa-icons.py`. `assets/` and `scripts/` are in `.dockerignore` so they don't bloat the runtime image.
+- **nginx PWA tweaks** in `nginx.conf`: serve `.webmanifest` as `application/manifest+json` (nginx's default mime.types doesn't know the extension), force `no-cache` on `/sw.js` so service worker updates always reach the client, immutable cache on hashed `workbox-*.js` files.
+- **TypeScript** picks up `virtual:pwa-register` via `src/vite-env.d.ts` (`/// <reference types="vite-plugin-pwa/client" />`).
 
 ## Architecture
 
