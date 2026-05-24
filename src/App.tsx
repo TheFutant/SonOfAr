@@ -33,12 +33,19 @@ export default function App() {
   const onChoose = useCallback(
     (choice: Choice) => {
       playClick(state.soundOn);
+      // "Roll credits" on an ending isn't a normal branch — it ends the run.
+      // Reset to a fresh game and return to the title (endings/toggles persist).
+      if (scene.isEnding) {
+        dispatch({ type: "new" });
+        setScreen("title");
+        return;
+      }
       dispatch({ type: "choose", choice });
       setInventoryOpen(false);
       setStatsOpen(false);
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
-    [state.soundOn],
+    [state.soundOn, scene.isEnding],
   );
 
   const onNewGame = useCallback(() => {

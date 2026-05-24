@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ENDING_TITLES, EndingId } from "../types/game";
 
 interface Props {
@@ -7,12 +8,7 @@ interface Props {
   onContinue: () => void;
 }
 
-const ALL_ENDINGS: EndingId[] = [
-  "myth_of_ar",
-  "two_of_them",
-  "public_servant_of_fire",
-  "carl_wins",
-];
+const ALL_ENDINGS = Object.keys(ENDING_TITLES) as EndingId[];
 
 export function TitleScreen({
   hasSave,
@@ -20,6 +16,7 @@ export function TitleScreen({
   onNewGame,
   onContinue,
 }: Props) {
+  const [confirmingNew, setConfirmingNew] = useState(false);
   return (
     <div className="relative z-10 mx-auto max-w-xl px-5 pt-safe pb-safe min-h-full flex flex-col">
       <div className="flex-1 flex flex-col items-center justify-center text-center py-16">
@@ -52,16 +49,46 @@ export function TitleScreen({
             </div>
           )}
           <div className="space-y-1">
-            <button
-              onClick={onNewGame}
-              className="choice-press w-full rounded-xl border border-ash-500/70 bg-ash-800/70 px-5 py-4 text-ash-50 text-lg hover:border-ember-500/70"
-            >
-              {hasSave ? "Start over" : "Begin"}
-            </button>
-            {hasSave && (
-              <p className="text-xs italic text-ash-300/80 text-center">
-                Resets the story. Discovered endings stay unlocked.
-              </p>
+            {!hasSave ? (
+              <button
+                onClick={onNewGame}
+                className="choice-press w-full rounded-xl border border-ash-500/70 bg-ash-800/70 px-5 py-4 text-ash-50 text-lg hover:border-ember-500/70"
+              >
+                Begin
+              </button>
+            ) : !confirmingNew ? (
+              <>
+                <button
+                  onClick={() => setConfirmingNew(true)}
+                  className="choice-press w-full rounded-xl border border-ash-500/70 bg-ash-800/70 px-5 py-4 text-ash-50 text-lg hover:border-ember-500/70"
+                >
+                  Start over
+                </button>
+                <p className="text-xs italic text-ash-300/80 text-center">
+                  Resets the story. Discovered endings stay unlocked.
+                </p>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => {
+                    setConfirmingNew(false);
+                    onNewGame();
+                  }}
+                  className="choice-press w-full rounded-xl border border-red-400/50 bg-red-500/15 px-5 py-4 text-red-100 text-lg"
+                >
+                  Confirm start over
+                </button>
+                <button
+                  onClick={() => setConfirmingNew(false)}
+                  className="choice-press w-full rounded-xl border border-ash-500/70 px-5 py-3 text-ash-200"
+                >
+                  Cancel
+                </button>
+                <p className="text-xs italic text-ash-300/80 text-center">
+                  This wipes your current run. Discovered endings stay unlocked.
+                </p>
+              </>
             )}
           </div>
         </div>
