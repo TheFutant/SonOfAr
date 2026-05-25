@@ -1,4 +1,5 @@
 import { ReactNode, useEffect } from "react";
+import { cx } from "../utils/cx";
 
 interface Props {
   open: boolean;
@@ -30,22 +31,22 @@ export function BottomSheet({ open, onClose, title, ariaLabel, children }: Props
       <div
         onClick={onClose}
         aria-hidden
-        className={[
+        className={cx(
           "fixed inset-0 z-30 bg-black/60 transition-opacity duration-200",
           open
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none",
-        ].join(" ")}
+        )}
       />
       <aside
         role="dialog"
         aria-label={ariaLabel ?? title}
-        className={[
+        className={cx(
           "fixed left-0 right-0 bottom-0 z-40 max-h-[80vh]",
           "rounded-t-2xl border-t border-ash-500/70 bg-ash-900/95 backdrop-blur",
           "transition-transform duration-300 will-change-transform pb-safe",
           open ? "translate-y-0" : "translate-y-full",
-        ].join(" ")}
+        )}
       >
         <div className="px-4 pt-3">
           <div className="mx-auto h-1.5 w-12 rounded-full bg-ash-500/70" />

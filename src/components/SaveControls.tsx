@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { cx } from "../utils/cx";
 
 interface Props {
   onSave: () => void;
@@ -87,12 +88,12 @@ function Toggle({
       onClick={onClick}
       role="switch"
       aria-checked={on}
-      className={[
+      className={cx(
         "text-left rounded-lg border px-3 py-2 transition-colors",
         on
           ? "border-ember-500/70 bg-ember-700/20 text-ash-50"
           : "border-ash-600/60 bg-ash-800/60 text-ash-200",
-      ].join(" ")}
+      )}
     >
       <div className="flex items-center justify-between">
         <span className="font-semibold">{label}</span>

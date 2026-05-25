@@ -1,4 +1,5 @@
 import { Choice } from "../types/game";
+import { cx } from "../utils/cx";
 
 interface Props {
   choice: Choice;
@@ -20,7 +21,7 @@ export function ChoiceButton({ choice, disabled, onClick }: Props) {
       type="button"
       disabled={disabled}
       onClick={() => onClick(choice)}
-      className={[
+      className={cx(
         "choice-press w-full text-left rounded-xl px-4 py-3 sm:py-3.5",
         "border border-ash-500/60 bg-ash-800/70 backdrop-blur",
         "text-ash-50 text-base sm:text-lg leading-snug",
@@ -30,15 +31,15 @@ export function ChoiceButton({ choice, disabled, onClick }: Props) {
           ? "opacity-40 cursor-not-allowed"
           : "hover:border-ember-600/70 active:border-ember-500/90 active:bg-ash-700/70",
         "min-h-[3.25rem]", // big tap target
-      ].join(" ")}
+      )}
     >
       <span className="block">{choice.label}</span>
       {choice.tag && (
         <span
-          className={[
+          className={cx(
             "mt-1 inline-block text-xs uppercase tracking-[0.18em]",
             tagColor ?? "text-ash-300/80",
-          ].join(" ")}
+          )}
         >
           · {choice.tag}
         </span>

@@ -9,6 +9,7 @@ import {
   StatKey,
   formatStat,
 } from "../types/game";
+import { cx } from "../utils/cx";
 import { BottomSheet } from "./BottomSheet";
 
 interface Props {
@@ -43,20 +44,20 @@ export function StatsSheet({ open, onClose, stats, focused }: Props) {
             <li
               key={k}
               data-stat={k}
-              className={[
+              className={cx(
                 "rounded-lg border bg-ash-800/60 px-3 py-2.5 transition-colors",
                 isFocused
                   ? "border-ember-500/70 ring-1 ring-ember-500/30"
                   : "border-ash-600/60",
-              ].join(" ")}
+              )}
             >
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-baseline gap-2 min-w-0">
                   <span
-                    className={[
+                    className={cx(
                       "text-xs font-semibold tracking-[0.22em]",
                       STAT_TINTS[k],
-                    ].join(" ")}
+                    )}
                   >
                     {STAT_CODES[k]}
                   </span>

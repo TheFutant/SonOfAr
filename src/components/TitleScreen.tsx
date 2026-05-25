@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ENDING_TITLES, EndingId } from "../types/game";
+import { cx } from "../utils/cx";
 
 interface Props {
   hasSave: boolean;
@@ -103,10 +104,10 @@ export function TitleScreen({
               return (
                 <li
                   key={e}
-                  className={[
+                  className={cx(
                     "flex items-center justify-between border-b border-ash-700/70 py-1",
                     done ? "text-ash-50" : "text-ash-400 italic",
-                  ].join(" ")}
+                  )}
                 >
                   <span>{done ? ENDING_TITLES[e] : "— ???"}</span>
                   <span className="text-xs">{done ? "✓" : ""}</span>

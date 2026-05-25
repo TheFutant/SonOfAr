@@ -7,6 +7,7 @@ import {
   StatKey,
   formatStat,
 } from "../types/game";
+import { cx } from "../utils/cx";
 
 interface Props {
   stats: Stats;
@@ -29,18 +30,18 @@ export function StatsPanel({ stats, onOpenDetails }: Props) {
             onClick={() => onOpenDetails?.(k)}
             title={`${STAT_LABELS[k]} — tap for details`}
             aria-label={`${STAT_LABELS[k]}: ${formatStat(v)}. Tap to see all stats.`}
-            className={[
+            className={cx(
               "choice-press rounded-lg border border-ash-600/60 bg-ash-800/70",
               "py-1.5 px-1.5 transition-colors min-h-[2.25rem]",
               "active:bg-ash-700/70 hover:border-ember-600/60",
               "flex items-center justify-center gap-1.5",
-            ].join(" ")}
+            )}
           >
             <span
-              className={[
+              className={cx(
                 "text-[11px] font-semibold tracking-[0.18em]",
                 STAT_TINTS[k],
-              ].join(" ")}
+              )}
             >
               {STAT_CODES[k]}
             </span>
