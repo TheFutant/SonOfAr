@@ -16,6 +16,8 @@ export const ITEMS = {
   masons_rulebook: "masons_rulebook",
   pearsons_diagram: "pearsons_diagram",
   burned_story_fragment: "burned_story_fragment",
+  maebie_bandana: "maebie_bandana",
+  emergency_chocolate: "emergency_chocolate",
 } as const;
 
 export type ItemId = (typeof ITEMS)[keyof typeof ITEMS];
@@ -34,6 +36,8 @@ export const ITEM_LABELS: Record<ItemId, string> = {
   masons_rulebook: "Mason's Rulebook",
   pearsons_diagram: "Sister Pearson's Diagram",
   burned_story_fragment: "Burned Story Fragment",
+  maebie_bandana: "Maebie's Bandana",
+  emergency_chocolate: "Emergency Chocolate",
 };
 
 export const ITEM_FLAVOR: Record<ItemId, string> = {
@@ -63,4 +67,8 @@ export const ITEM_FLAVOR: Record<ItemId, string> = {
     "A folded paper diagram. Proton, neutron, electron, drawn in calm hand. Beneath, in the same hand: 'or whatever you'd like to call them.'",
   burned_story_fragment:
     "A scrap of paper, edges scorched. One legible line: 'and then he chose, again, the third thing.'",
+  maebie_bandana:
+    "Faded red, soft from washing, smells faintly of dog and clean rain. She lets you carry it. She does not, strictly, need it back — but she will check.",
+  emergency_chocolate:
+    "A battered tin of squares, grandparent-issued. The label says FOR AFTER. Official recovery protocol. Not for the dog, under any circumstances.",
 };

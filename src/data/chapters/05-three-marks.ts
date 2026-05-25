@@ -357,8 +357,8 @@ Somewhere ahead, on somebody's porch, Carl from Insurance is waiting in a windbr
     choices: [
       {
         id: "three_marks_to_carl",
-        label: "Keep walking. Toward the porch.",
-        next: "carl_1",
+        label: "Keep walking. Down toward the wet country.",
+        next: "mire_road",
       },
     ],
   },

@@ -1,10 +1,10 @@
 import type { Scene } from "../../types/game";
 
-export const chapter7 = [
+export const chapter8 = [
   {
     id: "the_line_1",
     title: "The Line",
-    chapter: "VII · The Line",
+    chapter: "VIII · The Line",
     body: `You sit, eventually, on a curb that is colder than the rest of the curb.
 
 The Editor takes off her glasses. She looks tired in a way only people who actually love what they're protecting can be tired.

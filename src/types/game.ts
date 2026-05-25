@@ -20,7 +20,9 @@ export type EndingId =
   | "carl_wins"
   | "the_monster"
   | "editors_ending"
-  | "rain_reveals";
+  | "rain_reveals"
+  | "the_man"
+  | "reason_remains";
 
 export interface SceneEffect {
   stats?: Partial<Stats>;
@@ -138,4 +140,6 @@ export const ENDING_TITLES: Record<EndingId, string> = {
   the_monster: "The Monster",
   editors_ending: "The Editor's Ending",
   rain_reveals: "Rain Reveals",
+  the_man: "The Man",
+  reason_remains: "Reason Remains",
 };

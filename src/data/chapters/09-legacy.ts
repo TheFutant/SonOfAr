@@ -1,11 +1,11 @@
 import type { Scene } from "../../types/game";
 import { ITEMS } from "../items";
 
-export const chapter8 = [
+export const chapter9 = [
   {
     id: "legacy_1",
     title: "Legacy Written in Ash",
-    chapter: "VIII · Legacy Written in Ash",
+    chapter: "IX · Legacy Written in Ash",
     body: `By morning, three things are true:
 
 — Carl from Insurance has filed something somewhere,
@@ -68,6 +68,20 @@ Legacy is written in ash. Blood remembers. Destiny endures. Pick the line, and w
           minStats: { heat: 4 },
           maxStats: { humanity: 0 },
         },
+        showIfLocked: true,
+      },
+      {
+        id: "end_man",
+        label: "Put the matches down. Be a person about it. All the way down.",
+        next: "ending_man",
+        requires: { minStats: { humanity: 4 }, maxStats: { heat: 3 } },
+        showIfLocked: true,
+      },
+      {
+        id: "end_reason",
+        label: "Stand witness while Pearson becomes Reason. Decide what that costs.",
+        next: "ending_reason",
+        requires: { flag: { key: "pearson_insight", value: true } },
         showIfLocked: true,
       },
       {
@@ -241,6 +255,54 @@ In a margin somewhere, the Editor is, for the first time, silent.`,
     choices: [
       {
         id: "carl_to_title",
+        label: "Roll credits.",
+        next: "ash_wake_1",
+      },
+    ],
+  },
+  {
+    id: "ending_man",
+    title: "The Man",
+    chapter: "Ending · The Man",
+    body: `You put the matches down. Not dramatically. You just set them on a windowsill and leave them there, the way you'd leave a habit you've decided to outlive.
+
+It turns out a man is harder to be than a myth. A myth doesn't have to apologize to a widow, or learn a neighbor's name, or sit through the long unglamorous middle of being trusted again. You do all of it, badly at first, then less badly. Maebie supervises. The bandana fades further. The tin of chocolate gets refilled, which is its own quiet proof that there keep being afters worth recovering from.
+
+You never fully stop being the man who notices that things are flammable. You just stop being only that. Mason hears, eventually, and does not write to say he was wrong, but he leaves a door propped where there used to be a wall.
+
+The Editor writes one line and underlines it once, gently, like she means it: "He chose the third thing. He chose to stay."`,
+    editorNote:
+      "The Man is the hardest ending to write because nothing explodes. Connection over legend, person over symbol. I am, for the record, proud of you, and I will deny having said so in any subsequent edition.",
+    isEnding: true,
+    endingId: "the_man",
+    onEnter: { unlockEnding: "the_man" },
+    choices: [
+      {
+        id: "man_to_title",
+        label: "Roll credits.",
+        next: "ash_wake_1",
+      },
+    ],
+  },
+  {
+    id: "ending_reason",
+    title: "Reason Remains",
+    chapter: "Ending · Reason Remains",
+    body: `You don't leave. You stay, at the edge of the square, and you watch the myth finish closing over your sister like water over a stone.
+
+By winter, no one calls her Pearson. They come from three towns over to stand at her plain table and be told the cold true thing. She is fair. She is, by every account, scrupulously, frighteningly fair — a godlike quiet that does not need a throne, only the arithmetic and the nerve to read it aloud.
+
+Whether that is mercy or vengeance depends, in the end, on what you taught her was allowed. You were the one who kept saying her name. You were the one in the room when fairness cost something and someone had to decide whether kindness was permitted around its edges.
+
+Reason remains. She always will, now. The only question the story leaves open — the one the Editor refuses to answer in the margin, for once — is whether the world got a judge, or got a god, and whether you can still tell the difference between the two from where you're standing.`,
+    editorNote:
+      "Pearson is a person. Reason is what happens when people stop treating her like one. I am not going to tell you whether this ending is hopeful. You were there. You decide. That's the whole point of letting you hold the pen.",
+    isEnding: true,
+    endingId: "reason_remains",
+    onEnter: { unlockEnding: "reason_remains" },
+    choices: [
+      {
+        id: "reason_to_title",
         label: "Roll credits.",
         next: "ash_wake_1",
       },
