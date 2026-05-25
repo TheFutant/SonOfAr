@@ -1,7 +1,7 @@
 import { Scene, GameState, Choice } from "../types/game";
 import { ChoiceButton } from "./ChoiceButton";
 import { EditorNotes } from "./EditorNotes";
-import { meetsCondition } from "../utils/gameEngine";
+import { meetsCondition, visibleChoices } from "../utils/gameEngine";
 
 interface Props {
   scene: Scene;
@@ -10,10 +10,7 @@ interface Props {
 }
 
 export function SceneView({ scene, state, onChoose }: Props) {
-  const visible = scene.choices.filter((c) => {
-    if (meetsCondition(state, c.requires)) return true;
-    return !!c.showIfLocked;
-  });
+  const visible = visibleChoices(state, scene);
 
   return (
     <article className="animate-fadein">
