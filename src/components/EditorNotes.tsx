@@ -24,12 +24,14 @@ export function EditorNotes({
       setComplaint(null);
       return;
     }
-    // Pick a deterministic-ish complaint per scene so the same scene shows the
-    // same gripe across renders, but different scenes feel fresh.
-    const seed = Math.abs(
-      [...sceneId].reduce((acc, ch) => acc * 31 + ch.charCodeAt(0), 7),
-    );
-    setComplaint(EDITOR_COMPLAINTS[seed % EDITOR_COMPLAINTS.length]);
+    // Pick a deterministic complaint per scene so the same scene shows the same
+    // gripe across renders, but different scenes feel fresh. djb2 hash — spreads
+    // similar scene ids across the pool far better than a small polynomial mod.
+    let hash = 5381;
+    for (let i = 0; i < sceneId.length; i++) {
+      hash = (((hash << 5) + hash) ^ sceneId.charCodeAt(i)) >>> 0;
+    }
+    setComplaint(EDITOR_COMPLAINTS[hash % EDITOR_COMPLAINTS.length]);
   }, [chaosMode, sceneId]);
 
   if (!note && !writersRoomNote && !complaint) return null;
