@@ -1,6 +1,7 @@
 import {
   STAT_CODES,
   STAT_LABELS,
+  STAT_ORDER,
   STAT_TINTS,
   Stats,
   StatKey,
@@ -15,18 +16,10 @@ interface Props {
   onOpenDetails?: (focused?: StatKey) => void;
 }
 
-const ORDER: StatKey[] = [
-  "heat",
-  "humanity",
-  "evidence",
-  "chaos",
-  "editorApproval",
-];
-
 export function StatsPanel({ stats, onOpenDetails }: Props) {
   return (
     <div className="grid grid-cols-5 gap-1.5" role="group" aria-label="Stats">
-      {ORDER.map((k) => {
+      {STAT_ORDER.map((k) => {
         const v = stats[k];
         const sign = v > 0 ? "+" : "";
         return (

@@ -5,7 +5,6 @@ import { loadGame } from "../utils/storage";
 
 export type Action =
   | { type: "choose"; choice: Choice }
-  | { type: "load"; state: GameState }
   | { type: "new" }
   | {
       type: "set-flag";
@@ -17,8 +16,6 @@ export function reducer(state: GameState, action: Action): GameState {
   switch (action.type) {
     case "choose":
       return chooseChoice(state, action.choice, getScene);
-    case "load":
-      return action.state;
     case "new": {
       // Preserve completed endings and toggles across resets.
       const fresh = enterScene(newGame(), getScene(STARTING_SCENE_ID));

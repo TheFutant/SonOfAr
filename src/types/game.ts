@@ -7,6 +7,15 @@ export type StatKey =
 
 export type Stats = Record<StatKey, number>;
 
+/** Canonical display order for stats. Single source of truth for UI grids. */
+export const STAT_ORDER: StatKey[] = [
+  "heat",
+  "humanity",
+  "evidence",
+  "chaos",
+  "editorApproval",
+];
+
 export type CodeKey =
   | "never_start"
   | "never_burn_home"

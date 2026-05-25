@@ -4,7 +4,7 @@ import {
   EndingId,
   GameState,
   STAT_LABELS,
-  StatKey,
+  STAT_ORDER,
   CODE_LABELS,
 } from "../types/game";
 
@@ -12,14 +12,6 @@ interface Props {
   endingId: EndingId;
   state: GameState;
 }
-
-const STAT_ORDER: StatKey[] = [
-  "heat",
-  "humanity",
-  "evidence",
-  "chaos",
-  "editorApproval",
-];
 
 export function EndingCard({ endingId, state }: Props) {
   const [copied, setCopied] = useState(false);

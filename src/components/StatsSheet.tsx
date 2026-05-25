@@ -3,6 +3,7 @@ import {
   STAT_CODES,
   STAT_DESCRIPTIONS,
   STAT_LABELS,
+  STAT_ORDER,
   STAT_TINTS,
   Stats,
   StatKey,
@@ -14,14 +15,6 @@ interface Props {
   stats: Stats;
   focused?: StatKey | null;
 }
-
-const ORDER: StatKey[] = [
-  "heat",
-  "humanity",
-  "evidence",
-  "chaos",
-  "editorApproval",
-];
 
 export function StatsSheet({ open, onClose, stats, focused }: Props) {
   const listRef = useRef<HTMLUListElement>(null);
@@ -84,7 +77,7 @@ export function StatsSheet({ open, onClose, stats, focused }: Props) {
             ref={listRef}
             className="mt-3 max-h-[60vh] overflow-y-auto story-scroll pr-1 space-y-2"
           >
-            {ORDER.map((k) => {
+            {STAT_ORDER.map((k) => {
               const v = stats[k];
               const sign = v > 0 ? "+" : "";
               const isFocused = focused === k;
