@@ -5,6 +5,7 @@ import {
   STAT_TINTS,
   Stats,
   StatKey,
+  formatStat,
 } from "../types/game";
 
 interface Props {
@@ -21,14 +22,13 @@ export function StatsPanel({ stats, onOpenDetails }: Props) {
     <div className="grid grid-cols-5 gap-1.5" role="group" aria-label="Stats">
       {STAT_ORDER.map((k) => {
         const v = stats[k];
-        const sign = v > 0 ? "+" : "";
         return (
           <button
             key={k}
             type="button"
             onClick={() => onOpenDetails?.(k)}
             title={`${STAT_LABELS[k]} — tap for details`}
-            aria-label={`${STAT_LABELS[k]}: ${sign}${v}. Tap to see all stats.`}
+            aria-label={`${STAT_LABELS[k]}: ${formatStat(v)}. Tap to see all stats.`}
             className={[
               "choice-press rounded-lg border border-ash-600/60 bg-ash-800/70",
               "py-1.5 px-1.5 transition-colors min-h-[2.25rem]",
@@ -45,8 +45,7 @@ export function StatsPanel({ stats, onOpenDetails }: Props) {
               {STAT_CODES[k]}
             </span>
             <span className="text-base font-semibold text-ash-50 tabular-nums leading-none">
-              {sign}
-              {v}
+              {formatStat(v)}
             </span>
           </button>
         );

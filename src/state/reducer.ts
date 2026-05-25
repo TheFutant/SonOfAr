@@ -7,7 +7,8 @@ export type Action =
   | { type: "choose"; choice: Choice }
   | { type: "new" }
   | {
-      type: "set-flag";
+      // Toggles a UI preference (NOT a story flag — those live in GameState.flags).
+      type: "set-pref";
       key: keyof Pick<GameState, "chaosMode" | "writersRoomMode" | "soundOn">;
       value: boolean;
     };
@@ -27,7 +28,7 @@ export function reducer(state: GameState, action: Action): GameState {
         soundOn: state.soundOn,
       };
     }
-    case "set-flag":
+    case "set-pref":
       return { ...state, [action.key]: action.value };
   }
 }

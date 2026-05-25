@@ -74,7 +74,7 @@ export default function App() {
   const onToggle = useCallback(
     (key: "chaosMode" | "writersRoomMode" | "soundOn") => {
       const next = !state[key];
-      dispatch({ type: "set-flag", key, value: next });
+      dispatch({ type: "set-pref", key, value: next });
       if (key === "soundOn" && next) playClick(true);
     },
     [state],

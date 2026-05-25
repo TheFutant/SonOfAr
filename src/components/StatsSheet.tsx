@@ -7,6 +7,7 @@ import {
   STAT_TINTS,
   Stats,
   StatKey,
+  formatStat,
 } from "../types/game";
 import { BottomSheet } from "./BottomSheet";
 
@@ -37,7 +38,6 @@ export function StatsSheet({ open, onClose, stats, focused }: Props) {
       >
         {STAT_ORDER.map((k) => {
           const v = stats[k];
-          const sign = v > 0 ? "+" : "";
           const isFocused = focused === k;
           return (
             <li
@@ -65,8 +65,7 @@ export function StatsSheet({ open, onClose, stats, focused }: Props) {
                   </span>
                 </div>
                 <span className="text-ash-50 font-semibold tabular-nums shrink-0">
-                  {sign}
-                  {v}
+                  {formatStat(v)}
                 </span>
               </div>
               <p className="mt-1.5 text-sm text-ash-200/90 leading-relaxed">

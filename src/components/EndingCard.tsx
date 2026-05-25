@@ -6,6 +6,7 @@ import {
   STAT_LABELS,
   STAT_ORDER,
   CODE_LABELS,
+  formatStat,
 } from "../types/game";
 
 interface Props {
@@ -50,7 +51,7 @@ export function EndingCard({ endingId, state }: Props) {
           >
             <dt className="text-ash-300/90">{STAT_LABELS[k]}</dt>
             <dd className="tabular-nums text-ash-50 font-semibold">
-              {state.stats[k] > 0 ? `+${state.stats[k]}` : state.stats[k]}
+              {formatStat(state.stats[k])}
             </dd>
           </div>
         ))}
@@ -91,8 +92,7 @@ function buildSummary(endingId: EndingId, state: GameState): string {
   }
   lines.push("Stats:");
   for (const k of STAT_ORDER) {
-    const v = state.stats[k];
-    lines.push(`  • ${STAT_LABELS[k]}: ${v > 0 ? "+" + v : v}`);
+    lines.push(`  • ${STAT_LABELS[k]}: ${formatStat(state.stats[k])}`);
   }
   if (state.inventory.length) {
     lines.push("");

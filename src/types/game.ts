@@ -16,6 +16,11 @@ export const STAT_ORDER: StatKey[] = [
   "editorApproval",
 ];
 
+/** Stat value with an explicit leading "+" for positives (e.g. +3, 0, -2). */
+export function formatStat(v: number): string {
+  return v > 0 ? `+${v}` : `${v}`;
+}
+
 export type CodeKey =
   | "never_start"
   | "never_burn_home"
