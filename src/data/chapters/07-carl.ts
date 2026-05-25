@@ -53,7 +53,7 @@ Carl is always waiting on porches. Carl was, you suspect, born on a porch, in a 
 
 Three pages, single-spaced. Two pages are written in language that pretends to be English. The third page is, on inspection, mostly a list — and the list, on closer inspection, is missing its final comma.
 
-You feel the Oxford Comma Seal warm in your pocket.`,
+Your hand drifts to the inside pocket where the Oxford Comma Seal lives — or would, if you'd opened the right door this morning.`,
     editorNote:
       "Carl uses Oxford commas only when convenient. We do not. We use them always. This is how we know who he is.",
     choices: [
@@ -92,7 +92,10 @@ Carl's smile becomes the smile of a man being slowly handed a glass of water.`,
         id: "press_napkin",
         label: "Hand him the damp napkin.",
         next: "carl_confront",
-        effects: { stats: { evidence: 2, editorApproval: 2, chaos: 1 } },
+        effects: {
+          stats: { evidence: 2, editorApproval: 2, chaos: 1 },
+          removeItems: [ITEMS.damp_napkin],
+        },
         requires: { hasItems: [ITEMS.damp_napkin] },
         showIfLocked: true,
       },

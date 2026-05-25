@@ -216,7 +216,7 @@ You stop walking.
 
 "Three things in a list," you say, and your voice is, frankly, more careful than you meant it. "Three. Comma between the second and the third one. Or it's not a list. It's a duet with a guest verse."
 
-You reach into the inside pocket of your coat. The Oxford Comma Seal is, of course, there. It is always there. You press it into the dust at the edge of the path. It leaves the cleanest, smallest mark.
+You crouch at the edge of the path and press a small mark into the dust, between the second name and the third — with the Oxford Comma Seal if it's on you, with a soot-blackened thumb if it isn't. The principle does not care which. It leaves the cleanest, smallest comma.
 
 Sister Pearson looks at the mark, and then at you, and her face does the small private thing faces do when they are not going to admit anything.
 
@@ -236,7 +236,7 @@ Sister Pearson looks at the mark, and then at you, and her face does the small p
       },
       {
         id: "oxford_pocket_seal",
-        label: "Pocket the seal again. Some marks belong to the rain.",
+        label: "Leave the mark. Some marks belong to the rain.",
         next: "three_marks_ranya",
         effects: {
           stats: { humanity: 1, editorApproval: 1 },
