@@ -1,0 +1,21 @@
+# fly-log-shipper for Son of Ar usage telemetry.
+#
+# A separate, always-on Fly app that subscribes to the Fly log stream over NATS
+# and forwards lines to a *dedicated* Logflare source for sonofar. Unlike the
+# org-wide montejirasim-log-shipper (SUBJECT defaults to `logs.>`, ships
+# everything to the montejirasim source), this one is scoped to sonofar only via
+# `SUBJECT=logs.sonofar.>` so the `USAGE` records land in their own source.
+#
+# Deploy from this directory. Full runbook (secrets, source, verify): see
+# docs/telemetry-drain.md. No secrets live here — ACCESS_TOKEN / LOGFLARE_* /
+# SUBJECT are all set with `fly secrets set`.
+
+app = "sonofar-log-shipper"
+# Region is cosmetic — the org NATS stream is global — but match the app for tidiness.
+primary_region = "ord"
+
+[build]
+  image = "flyio/log-shipper:latest"
+
+# No [[services]] — the shipper takes no inbound traffic (reads the NATS log
+# stream, pushes outbound to Logflare), so it needs no public service.
