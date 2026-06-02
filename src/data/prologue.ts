@@ -21,14 +21,17 @@ export interface ProloguePanel {
   attribution?: string;
   /** Caption-box horizontal placement, for comic-panel asymmetry. */
   align?: "left" | "center" | "right";
-  /** Future: illustration path under /public. See AI-ART SEAM above. */
+  /** Illustration path under /public. See AI-ART SEAM above. */
   art?: string;
+  /** Accessibility description of `art`, rendered as the img `alt`. */
+  alt?: string;
 }
 
 export const PROLOGUE_PANELS: readonly ProloguePanel[] = [
   {
     id: "ash",
     art: "/prologue/p1-ash.webp",
+    alt: "A burned-out small-town street at dusk, smoke rising from the houses and a faint ember glow on the horizon.",
     shout: "Ash.",
     caption:
       "A town wakes smelling of burnt sugar and wet drywall and something that wants to be rosemary but isn't. It has smelled this way before.",
@@ -37,6 +40,7 @@ export const PROLOGUE_PANELS: readonly ProloguePanel[] = [
   {
     id: "you",
     art: "/prologue/p2-you.webp",
+    alt: "A man slumped on a wrecked floor seen from above, a crooked ceiling fan overhead, one hand reaching toward the viewer.",
     shout: "You.",
     caption:
       "You come to under a ceiling fan that is, mostly, still attached to the ceiling. Your right palm is bandaged. Badly. By you, probably.",
@@ -45,6 +49,7 @@ export const PROLOGUE_PANELS: readonly ProloguePanel[] = [
   {
     id: "the-note",
     art: "/prologue/p3-note.webp",
+    alt: "A close-up of a frayed, soot-darkened shirt cuff with a button, embers glowing in the dark beyond.",
     caption:
       "A note is tucked in your cuff, in a hand that punctuates like it means it:\n“You are awake. Try not to make this confusing — we are barely two paragraphs in.”",
     attribution: "— The Editor",
@@ -53,6 +58,7 @@ export const PROLOGUE_PANELS: readonly ProloguePanel[] = [
   {
     id: "three-columns",
     art: "/prologue/p4-smoke.webp",
+    alt: "A dark room with three separate columns of smoke rising — past a window, from a closet door, and from the floor.",
     shout: "Three columns of smoke.",
     caption:
       "One past the kitchen window. A closet you don't remember closing. And the floor, which has opinions about where you should be.",
@@ -61,6 +67,7 @@ export const PROLOGUE_PANELS: readonly ProloguePanel[] = [
   {
     id: "the-name",
     art: "/prologue/p5-name.webp",
+    alt: "A scorched wall bearing an unreadable mark; beyond it, a brown pit bull mix stands alert in a burned street.",
     caption:
       "There's a smudge on the wall that almost spells a name. You're not going to read it yet. Three streets over, a dog you'd burn the world to keep is barking at nothing in particular. Her name is Maebie.",
     align: "right",
@@ -68,6 +75,7 @@ export const PROLOGUE_PANELS: readonly ProloguePanel[] = [
   {
     id: "punctuate",
     art: "/prologue/p6-punctuate.webp",
+    alt: "A man silhouetted from behind in a doorway, facing a town already on fire ahead of him.",
     shout: "Punctuate yourself accordingly.",
     caption: "He never starts the fire. He only uses what is already there.",
     align: "center",

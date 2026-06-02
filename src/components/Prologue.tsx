@@ -107,7 +107,7 @@ export function Prologue({ onComplete, onSkip, soundOn, finishLabel = "Begin" }:
           {panel.art && (
             <img
               src={panel.art}
-              alt=""
+              alt={panel.alt ?? ""}
               className="w-full rounded-lg border border-ash-600/70 object-cover shadow-lg shadow-black/40"
             />
           )}
