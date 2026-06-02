@@ -5,6 +5,10 @@ Per-panel briefs for illustrating the six prologue beats. The prologue ships
 (or an illustrator) when you decide to fill the `art` slot in
 `src/data/prologue.ts`. Captions stay in CSS — **the art carries no lettering.**
 
+> Project-wide master art direction, palette, character bible, and the reusable
+> style/negative prompts live in **`art-direction.md`** — this file is the
+> prologue-specific shot list and inherits all of it.
+
 ## How the art wires in
 
 1. Generate one image per panel (consistency workflow below).
