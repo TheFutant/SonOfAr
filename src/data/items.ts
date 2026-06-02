@@ -18,6 +18,11 @@ export const ITEMS = {
   burned_story_fragment: "burned_story_fragment",
   maebie_bandana: "maebie_bandana",
   emergency_chocolate: "emergency_chocolate",
+  dog_logistics_clipboard: "dog_logistics_clipboard",
+  road_pie: "road_pie",
+  receipt_of_questionable_origin: "receipt_of_questionable_origin",
+  immunity_gravy: "immunity_gravy",
+  alien_extraction_shirt: "alien_extraction_shirt",
 } as const;
 
 export type ItemId = (typeof ITEMS)[keyof typeof ITEMS];
@@ -38,6 +43,11 @@ export const ITEM_LABELS: Record<ItemId, string> = {
   burned_story_fragment: "Burned Story Fragment",
   maebie_bandana: "Maebie's Bandana",
   emergency_chocolate: "Emergency Chocolate",
+  dog_logistics_clipboard: "Dog Logistics Clipboard",
+  road_pie: "Road Pie",
+  receipt_of_questionable_origin: "Receipt of Questionable Origin",
+  immunity_gravy: "Immunity Gravy",
+  alien_extraction_shirt: "Alien Extraction Shirt",
 };
 
 export const ITEM_FLAVOR: Record<ItemId, string> = {
@@ -71,4 +81,14 @@ export const ITEM_FLAVOR: Record<ItemId, string> = {
     "Faded red, soft from washing, smells faintly of dog and clean rain. She lets you carry it. She does not, strictly, need it back — but she will check.",
   emergency_chocolate:
     "A battered tin of squares, grandparent-issued. The label says FOR AFTER. Official recovery protocol. Not for the dog, under any circumstances.",
+  dog_logistics_clipboard:
+    "Water, leashes, emergency towels, snack schedule, and a box labeled EMOTIONAL SUPPORT JURISDICTION that nobody has dared check yes or no on. Two dog names at the top: Maebie, and — penciled in later, in a hopeful hand — Bishop.",
+  road_pie:
+    "A single slice in a clamshell, riding shotgun where a passenger isn't. The crust held through two states. Some pie is dessert; this pie is a travel companion with opinions about the route.",
+  receipt_of_questionable_origin:
+    "A diner receipt for items you do not remember ordering, totaled in a currency that is mostly dollars. The Editor has flagged line four ('SEE SERVER') as either foreshadowing or a health-code violation.",
+  immunity_gravy:
+    "A mason jar of gravy from a meal that became family lore. Survived it together once; you keep a jar in case the road serves you worse. Confers no actual immunity. Confers, arguably, worse.",
+  alien_extraction_shirt:
+    "A roadside-stand tee, three sizes of confident. Cartoon saucer, beam, cow mid-ascension, slogan: ASK ME ABOUT DISCLOSURE DAY. If aliens exist, they are also subject to character agency.",
 };
