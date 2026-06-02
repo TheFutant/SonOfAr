@@ -15,6 +15,16 @@ jobs:
     concurrency: deploy-group    # optional: ensure only one action runs at a time
     steps:
       - uses: actions/checkout@v5
+      # Offline playthrough QA gate (scripts/qa) — replays the game with the
+      # app's pure modules and hard-fails on unreachable endings, dead-ends,
+      # canon-string or telemetry-parity breaks. Runs before deploy so a broken
+      # story never ships. See docs/local-qa.md.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run qa
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
         env:
