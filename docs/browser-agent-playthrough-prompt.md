@@ -1,5 +1,12 @@
 # Browser-agent prompt — Son of Ar playthrough QA
 
+> **Run `npm run qa` first.** Most of this prompt's work — endings coverage
+> (with exact paths), dead-ends, unreachable content, canon string-checks,
+> telemetry parity — now runs locally for free via `scripts/qa/playthrough.ts`
+> (see `local-qa.md`). Use a browser agent only for what the local tool can't
+> do: visual layout, live beacons hitting nginx, PWA/offline, and the toggle /
+> save-continue UI.
+
 Paste everything below the line into your browser-automation agent. It is
 self-contained: target URL, UI map, tasks, and the report format.
 

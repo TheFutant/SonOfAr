@@ -11,7 +11,9 @@ The Editor takes off her glasses. She looks tired in a way only people who actua
 
 "Every man who burns," she says, "is one decision away from a man who only stands near burning. Three siblings. Three roads. Three readings of the same mark. The line is yours, not mine. But it's load-bearing. Pick one."`,
     editorNote:
-      "I am, for the next four lines, declining to be funny. This is the spine of the story. Pick one.",
+      "I am, for the next few lines, declining to be funny. This is the spine of the story. Pick one.",
+    writersRoomNote:
+      "Four codes are the honest lines. A fifth — the refusal — only surfaces if Mason already wrote you off (mason_sees_lost): the player who raged at him in Three Marks is the only one offered the chance to prove him right. It sets chose_cruelty, the sole gate to The Monster ending; declining a code IS the monstrous choice.",
     choices: [
       {
         id: "code_never_start",
@@ -48,6 +50,17 @@ The Editor takes off her glasses. She looks tired in a way only people who actua
           setCode: "never_paperwork",
           stats: { evidence: 2, editorApproval: 1 },
         },
+      },
+      {
+        id: "code_refuse",
+        label: '"No line. I burn what I decide needs burning."',
+        next: "legacy_1",
+        requires: { flag: { key: "mason_sees_lost", value: true } },
+        effects: {
+          stats: { heat: 2, humanity: -2, editorApproval: -2, chaos: 1 },
+          setFlags: [{ key: "chose_cruelty", value: true }],
+        },
+        tag: "no code",
       },
     ],
   },

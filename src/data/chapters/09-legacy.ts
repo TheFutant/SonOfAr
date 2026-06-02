@@ -63,10 +63,13 @@ Legacy is written in ash. Blood remembers. Destiny endures. Pick the line, and w
         id: "end_monster",
         label: "Become the thing he warned you about.",
         next: "ending_monster",
+        // Gated on chose_cruelty (set only by refusing a code at The Line, which
+        // itself requires mason_sees_lost) + heat. The old maxStats humanity ≤ 0
+        // was unreachable: the lowest humanity the stat economy allows by Legacy
+        // is +3. See scripts/qa/playthrough.ts.
         requires: {
-          flag: { key: "mason_sees_lost", value: true },
+          flag: { key: "chose_cruelty", value: true },
           minStats: { heat: 4 },
-          maxStats: { humanity: 0 },
         },
         showIfLocked: true,
       },

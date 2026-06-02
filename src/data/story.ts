@@ -29,6 +29,10 @@ export type SceneId = (typeof chapters)[number][number]["id"];
 const scenes: readonly Scene[] = chapters.flat();
 const sceneMap = new Map<string, Scene>(scenes.map((s) => [s.id, s]));
 
+/** Full scene list (already validated above). Exposed for offline QA tooling
+ *  (scripts/qa) that replays the pure engine; the app itself uses getScene. */
+export const allScenes: readonly Scene[] = scenes;
+
 export const STARTING_SCENE_ID = "ash_wake_1" satisfies SceneId;
 
 validateStory(scenes, STARTING_SCENE_ID);
