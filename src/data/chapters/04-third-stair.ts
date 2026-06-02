@@ -69,6 +69,12 @@ The third is the chair in the corner. It is wooden. It is plain. It has been lab
         next: "stair_maebie_knows",
       },
       {
+        id: "plan_the_drive",
+        label: "Take the hand-drawn map with three addresses off the corkboard.",
+        next: "drive_hub",
+        tag: "optional detour",
+      },
+      {
         id: "lie_down_cot",
         label: "There's a cot. You haven't slept in three days. Lie down.",
         next: "stair_dream",

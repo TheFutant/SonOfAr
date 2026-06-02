@@ -8,6 +8,7 @@ import { chapter6 } from "./chapters/06-reason";
 import { chapter7 } from "./chapters/07-carl";
 import { chapter8 } from "./chapters/08-the-line";
 import { chapter9 } from "./chapters/09-legacy";
+import { chapter10 } from "./chapters/10-the-drive";
 import { validateStory } from "./validate";
 
 const chapters = [
@@ -20,6 +21,7 @@ const chapters = [
   chapter7,
   chapter8,
   chapter9,
+  chapter10,
 ] as const;
 
 export type SceneId = (typeof chapters)[number][number]["id"];
