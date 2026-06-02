@@ -20,10 +20,9 @@ Per-panel briefs for illustrating the six prologue beats. The prologue ships
 per WebP at ~1280 px wide. If they come in heavy, we lazy-load them out of the
 precache instead (ask and I'll wire that).
 
-**Integration note (decide before generating):** with a real image present, the
-big `shout` word may compete with the art. Options — keep `shout` as a small
-kicker over the caption (current behavior, fine), or I add a flag so panels with
-`art` drop the shout. Your call; doesn't affect the prompts.
+**Integration note (decided):** the big `shout` word **stays** as a kicker over
+the caption even when `art` is present (current behavior). Art is the visual;
+the shout is the beat's punch line. No component change needed.
 
 **Accessibility:** the component currently renders `alt=""` (decorative, since
 the caption conveys the meaning). Per-panel `alt` text is suggested below if you
@@ -89,10 +88,14 @@ The six panels must look like one hand. Before the panels:
    right palm.* In the prologue keep him **partly obscured** — shadow,
    silhouette, back-of-head, or cropped — to preserve mystery. He is never
    smiling, never heroic-clean.
-2. **Maebie character anchor.** Breed is **not canon — pick one and lock it.**
-   Suggested default: *a scrappy medium mixed-breed, dark wiry coat, one ear up,
-   bright ember-catching eyes, expressive and very alive.* Generate a clean
-   reference, then reuse it in panel 5. (Confirm the breed choice with the owner.)
+2. **Maebie character anchor (canon).** A **brown pit bull mix** — compact, a
+   smallish/medium build (canon prose calls her one of the "small brown dogs"),
+   short brown/brindle coat, and the signature tan **"eyebrow" markings** that do
+   "the eyebrow thing" (judging your judgment, gently, in advance). Bright,
+   ember-catching eyes; expressive, soft, and very alive. **Depict her as gentle
+   and beloved — never snarling, menacing, or in danger** (counter the breed
+   stereotype; she's the partner "you'd burn the world to keep"). Generate a
+   clean reference, then reuse it in panel 5.
 3. Generate panels with the same seed family + the Arson/Maebie references so
    faces and the dog stay stable.
 
@@ -161,12 +164,12 @@ The six panels must look like one hand. Before the panels:
   back toward the viewer. Two clear focal points.
 - **Subject prompt:** *foreground: an indistinct scorch mark on a soot-stained
   wall that almost resembles handwriting but is unreadable. Background down the
-  street: a scrappy medium mixed-breed dog, dark coat, one ear up, bright
-  ember-lit eyes, sitting alert and healthy, looking back toward camera. Warm
-  ember light, ash in the air.*
+  street: a brown pit bull mix, compact, short brindle coat with tan eyebrow
+  markings, bright ember-lit eyes, sitting alert and healthy with a gentle
+  expression, looking back toward camera. Warm ember light, ash in the air.*
 - **Guardrails:** the smudge stays **illegible**; **Maebie is alive, healthy,
-  calm, unharmed, never in danger**. No blood, no chocolate, nothing threatening
-  her.
+  calm, gentle, unharmed, never in danger**. Read as beloved, **not** menacing —
+  no snarl, no aggression. No blood, no chocolate, nothing threatening her.
 - **alt:** "An unreadable scorch mark on a wall; down the street, an alert,
   healthy dog looks back."
 
@@ -192,7 +195,8 @@ The six panels must look like one hand. Before the panels:
 - [ ] Arson's face + bandaged hand consistent across P2/P6; Maebie matches her
       reference in P5.
 - [ ] No readable text anywhere (recheck P3, P5).
-- [ ] Maebie alive/healthy/safe in P5; nothing violates the canon guardrails.
+- [ ] Maebie reads as a gentle, beloved brown pit bull mix (eyebrow markings) —
+      alive/healthy/safe, never menacing — in P5; nothing violates the guardrails.
 - [ ] Palette holds — ember is the only saturated color; everything else
       ash/charcoal.
 - [ ] Exported WebP, uniform 3:2, each ≤ ~90 KB; placed in `public/prologue/`.
