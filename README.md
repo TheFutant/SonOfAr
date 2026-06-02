@@ -10,7 +10,7 @@ Built with **React + TypeScript + Vite + Tailwind CSS**. Deploys as a single sta
 
 ## Features
 
-- 9 chapters, 58 scenes, **9 endings**
+- 9 chapters + an optional road-trip detour, 70 scenes, **9 endings**
 - Stats: Heat, Humanity, Evidence, Chaos, Editor Approval
 - Inventory (Damp Napkin, Oxford Comma Seal, Maebie's Collar, et cetera)
 - Save / load via `localStorage` — auto-saves after every choice
@@ -130,7 +130,7 @@ The story is data, not code. To add a chapter or scene, edit `src/data/story.ts`
 - [x] Choices branch correctly; locked choices reveal once requirements are met
 - [x] LocalStorage save/load works (auto-save + Save now button + Reset)
 - [x] Inventory and stats update on choices
-- [x] 58 scenes, 9 endings reachable
+- [x] 70 scenes, 9 endings reachable
 - [x] README explains local dev and Tailscale / home-lab deployment
 
 ---
