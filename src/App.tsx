@@ -7,6 +7,7 @@ import { playClick } from "./utils/sound";
 import { trackEvent, trackSession } from "./utils/usage";
 import { EmberBackground } from "./components/EmberBackground";
 import { TitleScreen } from "./components/TitleScreen";
+import { Prologue } from "./components/Prologue";
 import { TopBar } from "./components/TopBar";
 import { SceneView } from "./components/SceneView";
 import { StatsPanel } from "./components/StatsPanel";
@@ -15,11 +16,14 @@ import { InventoryDrawer } from "./components/InventoryDrawer";
 import { SaveControls } from "./components/SaveControls";
 import { EndingCard } from "./components/EndingCard";
 
-type Screen = "title" | "play";
+type Screen = "title" | "prologue" | "play";
 
 export default function App() {
   const [state, dispatch] = useReducer(reducer, undefined, init);
   const [screen, setScreen] = useState<Screen>("title");
+  // Where the prologue hands off when finished/skipped: "play" when it precedes
+  // a new game, "title" when it's being replayed from the title screen.
+  const [afterPrologue, setAfterPrologue] = useState<Screen>("play");
   const [inventoryOpen, setInventoryOpen] = useState(false);
   const [statsOpen, setStatsOpen] = useState(false);
   const [statsFocused, setStatsFocused] = useState<StatKey | null>(null);
@@ -68,7 +72,16 @@ export default function App() {
     playClick(state.soundOn);
     trackEvent("new_game");
     dispatch({ type: "new" });
-    setScreen("play");
+    // The prologue plays before the first scene (it's skippable). It fires its
+    // own "prologue" beacon and hands off to "play" when finished/skipped.
+    setAfterPrologue("play");
+    setScreen("prologue");
+  }, [state.soundOn]);
+
+  const onReplayPrologue = useCallback(() => {
+    playClick(state.soundOn);
+    setAfterPrologue("title");
+    setScreen("prologue");
   }, [state.soundOn]);
 
   const onContinue = useCallback(() => {
@@ -111,6 +124,14 @@ export default function App() {
           completedEndings={state.completedEndings}
           onNewGame={onNewGame}
           onContinue={onContinue}
+          onReplayPrologue={onReplayPrologue}
+        />
+      ) : screen === "prologue" ? (
+        <Prologue
+          soundOn={state.soundOn}
+          finishLabel={afterPrologue === "play" ? "Begin" : "Done"}
+          onComplete={() => setScreen(afterPrologue)}
+          onSkip={() => setScreen(afterPrologue)}
         />
       ) : (
         <div className="relative z-10 mx-auto max-w-2xl px-4 pt-safe pb-28">

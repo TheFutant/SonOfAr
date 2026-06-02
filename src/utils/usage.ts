@@ -10,7 +10,7 @@
 // per-app wiring. Beacons are best-effort: failures (e.g. local `npm run dev`,
 // where there is no nginx and `/t` 404s) are swallowed.
 
-export type UsageEvent = "session_start" | "new_game" | "ending" | "detour";
+export type UsageEvent = "session_start" | "new_game" | "ending" | "detour" | "prologue";
 
 function beacon(evt: UsageEvent, lbl?: string): void {
   const qs = new URLSearchParams({ evt });

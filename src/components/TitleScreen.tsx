@@ -7,6 +7,7 @@ interface Props {
   completedEndings: EndingId[];
   onNewGame: () => void;
   onContinue: () => void;
+  onReplayPrologue: () => void;
 }
 
 const ALL_ENDINGS = Object.keys(ENDING_TITLES) as EndingId[];
@@ -16,6 +17,7 @@ export function TitleScreen({
   completedEndings,
   onNewGame,
   onContinue,
+  onReplayPrologue,
 }: Props) {
   const [confirmingNew, setConfirmingNew] = useState(false);
   return (
@@ -92,6 +94,12 @@ export function TitleScreen({
               </>
             )}
           </div>
+          <button
+            onClick={onReplayPrologue}
+            className="choice-press mt-1 text-xs uppercase tracking-[0.22em] text-ash-300/80 hover:text-ember-400"
+          >
+            ▸ Prologue
+          </button>
         </div>
 
         <div className="mt-10 w-full">
