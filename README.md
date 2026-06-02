@@ -4,7 +4,7 @@ A short, mobile-first, dark-comic interactive fiction game about a man named **A
 
 > "He never starts the fire. He only uses what is already there."
 
-Built with **React + TypeScript + Vite + Tailwind CSS**. Deploys as a single static container behind nginx, intended to live inside a private Tailscale / home-lab network.
+Built with **React + TypeScript + Vite + Tailwind CSS**. Ships as a single static container (multi-stage build → nginx) and is **live on [Fly.io](https://sonofar.fly.dev/)**; it also runs locally via Docker.
 
 ---
 
@@ -53,55 +53,39 @@ broken story can't ship. Details in [`docs/local-qa.md`](docs/local-qa.md).
 
 ---
 
-## Docker / home-lab deployment
+## Deployment (Fly.io)
 
-The container is multi-stage: build with Node 20, serve with nginx.
+Live at **https://sonofar.fly.dev/**.
+
+Deploys are **CI-driven** — pushing to `main` triggers `.github/workflows/fly-deploy.yml`, which runs `npm run qa` and then `flyctl deploy --remote-only`. Fly builds from the same `Dockerfile` used locally. **Don't run `flyctl deploy` by hand** — a manual deploy races the CI machine lease and skips the QA gate. Just push, watch the Action go green, and verify the live URL.
+
+- **Config** — `fly.toml`: app `sonofar`, primary region `ord`, shared-cpu-1x / 1 GB, internal port 80, `force_https`, auto-stop/auto-start (idle machines cost nothing).
+- **Ops** — `flyctl logs`, `flyctl status`, `flyctl ssh console`.
+- **Health** — `GET /healthz` → `200 ok`.
+
+(A Tailscale private URL was explored but isn't used — Fly was the simpler path to a public test URL.)
+
+---
+
+## Run locally with Docker
+
+The same multi-stage container Fly builds (Node 20 → nginx):
 
 ```bash
-docker compose up -d --build
+docker compose up -d --build       # serves on http://localhost:8090
 ```
 
-The app is then reachable at:
-
-```
-http://<host-tailscale-name>:8090
-http://<host-tailscale-ip>:8090
-```
-
-### Configuring the host port
-
-The default host port is `8090`. To override, either edit `docker-compose.yml` or pass an env var:
+Override the host port via `docker-compose.yml` or an env var:
 
 ```bash
 SON_OF_AR_PORT=9000 docker compose up -d --build
 ```
 
-### Tailscale notes
-
-There's nothing Tailscale-specific in the container itself — it just listens on port 80 inside the container, mapped to the host port 8090. As long as the Docker host is on your tailnet, the app is reachable at:
-
-```
-http://<machine-name-from-tailscale-status>:8090
-```
-
-To make the URL nicer, you can use [Tailscale Serve](https://tailscale.com/kb/1242/tailscale-serve) on the host (HTTPS, no port number):
+`GET /healthz` → `200 ok` backs the `docker compose ps` health status. Stop / update:
 
 ```bash
-sudo tailscale serve --bg --https=443 http://localhost:8090
-```
-
-That maps `https://<machine-name>.<tailnet>.ts.net` to the container. (Optional.)
-
-### Health check
-
-The container exposes `GET /healthz` → `200 ok`. `docker compose ps` will report container health based on it.
-
-### Stopping / updating
-
-```bash
-docker compose down            # stop and remove
-docker compose pull            # if you're using a registry image
-docker compose up -d --build   # rebuild after pulling new code
+docker compose down                # stop and remove
+docker compose up -d --build       # rebuild after pulling new code
 ```
 
 ---
@@ -149,14 +133,14 @@ The story is data, not code. To add a chapter or scene, edit the relevant file i
 - [x] `npm install` works
 - [x] `npm run dev` works
 - [x] `npm run build` succeeds
-- [x] `docker compose up -d --build` serves the app on `:8090`
+- [x] Live on Fly.io via CI (`git push` → QA gate → deploy); `docker compose up -d --build` serves locally on `:8090`
 - [x] App is readable and usable on mobile (large text, big tap targets, dark theme, safe-area padding)
 - [x] Choices branch correctly; locked choices reveal once requirements are met
 - [x] LocalStorage save/load works (auto-save + Save now button + Reset)
 - [x] Inventory and stats update on choices
 - [x] 70 scenes, 9 endings reachable
 - [x] `npm run qa` passes (9/9 endings, no dead-ends, canon + telemetry checks) and gates CI deploys
-- [x] README explains local dev and Tailscale / home-lab deployment
+- [x] README explains local dev, the offline QA gate, and Fly.io / Docker deployment
 
 ---
 
