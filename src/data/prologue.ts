@@ -49,7 +49,7 @@ export const PROLOGUE_PANELS: readonly ProloguePanel[] = [
   {
     id: "the-note",
     art: "/prologue/p3-note.webp",
-    alt: "A close-up of a frayed, soot-darkened shirt cuff with a button, embers glowing in the dark beyond.",
+    alt: "A folded paper note tucked into a frayed, soot-darkened shirt cuff, lit warm against the dark, its markings illegible.",
     caption:
       "A note is tucked in your cuff, in a hand that punctuates like it means it:\n“You are awake. Try not to make this confusing — we are barely two paragraphs in.”",
     attribution: "— The Editor",
