@@ -11,6 +11,7 @@ Built with **React + TypeScript + Vite + Tailwind CSS**. Deploys as a single sta
 ## Features
 
 - 9 chapters + an optional road-trip detour, 70 scenes, **9 endings**
+- Illustrated, skippable **prologue** cold-open — six comic panels that play once for a new player and replay any time from the title's `▸ Prologue`
 - Stats: Heat, Humanity, Evidence, Chaos, Editor Approval
 - Inventory (Damp Napkin, Oxford Comma Seal, Maebie's Collar, et cetera)
 - Save / load via `localStorage` — auto-saves after every choice
@@ -30,9 +31,25 @@ npm run dev          # http://localhost:5173
 npm run build        # type-checks + emits dist/
 npm run preview      # serves built dist/ on :4173
 npm run typecheck    # type-check only
+npm run qa           # offline playthrough QA (see below)
 ```
 
 Tested against Node 20.
+
+---
+
+## Offline QA harness
+
+`npm run qa` replays the entire game in Node using the same pure engine the app
+uses — no browser, no tokens, sub-second. It:
+
+- proves all **9 endings** are reachable and prints the exact choice path to each (a state-space search over the real choice graph, not random sampling);
+- finds runtime **dead-ends** and unreachable scenes/choices — condition-aware, so it catches gating bugs the structural validator can't;
+- **lints canon** (forbidden strings like "Bailey" / "Big Don's");
+- checks **telemetry parity** (`usage.ts` events ↔ the nginx whitelist).
+
+It exits non-zero on any hard failure and runs in CI **before every deploy**, so a
+broken story can't ship. Details in [`docs/local-qa.md`](docs/local-qa.md).
 
 ---
 
@@ -103,9 +120,13 @@ src/
     storage.ts          – localStorage save/load
     sound.ts            – WebAudio click (no audio assets)
   data/
-    story.ts            – every scene, item, and ending lives here
+    story.ts            – combiner: imports chapters, validates, exports getScene
+    chapters/           – 01-ash-wake … 10-the-drive (every scene lives here)
+    items.ts            – inventory items
+    prologue.ts         – illustrated cold-open panels (story-as-data)
   components/
     TitleScreen.tsx
+    Prologue.tsx
     SceneView.tsx
     ChoiceButton.tsx
     StatsPanel.tsx
@@ -114,9 +135,12 @@ src/
     SaveControls.tsx
     EndingCard.tsx
     EmberBackground.tsx
+scripts/
+  qa/playthrough.ts     – offline QA harness (npm run qa)
+  build-prologue-art.py – regenerate prologue WebP from assets/prologue/ masters
 ```
 
-The story is data, not code. To add a chapter or scene, edit `src/data/story.ts` — each `Scene` declares its body text, optional Editor note, choices, stat changes, item changes, and conditions. The engine will pick up new content with no code changes.
+The story is data, not code. To add a chapter or scene, edit the relevant file in `src/data/chapters/` — each `Scene` declares its body text, optional Editor note, choices, stat changes, item changes, and conditions. The content validator runs at boot and `npm run qa` proves reachability, so broken refs fail loudly with no code changes.
 
 ---
 
@@ -131,6 +155,7 @@ The story is data, not code. To add a chapter or scene, edit `src/data/story.ts`
 - [x] LocalStorage save/load works (auto-save + Save now button + Reset)
 - [x] Inventory and stats update on choices
 - [x] 70 scenes, 9 endings reachable
+- [x] `npm run qa` passes (9/9 endings, no dead-ends, canon + telemetry checks) and gates CI deploys
 - [x] README explains local dev and Tailscale / home-lab deployment
 
 ---
