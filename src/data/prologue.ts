@@ -8,7 +8,8 @@
 // drop the images in public/prologue/ and set `art` here; the component renders
 // the illustration behind the caption automatically, no structural change. Keep
 // any art canon-safe (Maebie is a living partner; no Bailey; the Editor's voice;
-// Pearson is not yet "Reason").
+// Pearson is not yet "Reason"). Per-panel art prompts + canon guardrails live in
+// docs/prologue-art-briefs.md.
 
 export interface ProloguePanel {
   id: string;
