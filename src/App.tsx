@@ -4,6 +4,7 @@ import { init, reducer } from "./state/reducer";
 import { Choice, StatKey } from "./types/game";
 import { clearSave, loadGame, saveGame } from "./utils/storage";
 import { playClick } from "./utils/sound";
+import { trackEvent, trackSession } from "./utils/usage";
 import { EmberBackground } from "./components/EmberBackground";
 import { TitleScreen } from "./components/TitleScreen";
 import { TopBar } from "./components/TopBar";
@@ -30,6 +31,21 @@ export default function App() {
     saveGame(state);
   }, [state]);
 
+  // Anonymous usage telemetry (see utils/usage.ts). One session_start per load.
+  useEffect(() => {
+    trackSession();
+  }, []);
+
+  // Log reaching an ending (label = ending id) and entering the optional detour.
+  // Fires once per scene change since `scene` is memoised on the scene id.
+  useEffect(() => {
+    if (scene.isEnding && scene.endingId) {
+      trackEvent("ending", scene.endingId);
+    } else if (scene.id === "drive_hub") {
+      trackEvent("detour");
+    }
+  }, [scene]);
+
   const onChoose = useCallback(
     (choice: Choice) => {
       playClick(state.soundOn);
@@ -50,6 +66,7 @@ export default function App() {
 
   const onNewGame = useCallback(() => {
     playClick(state.soundOn);
+    trackEvent("new_game");
     dispatch({ type: "new" });
     setScreen("play");
   }, [state.soundOn]);
