@@ -23,6 +23,7 @@ export function newGame(): GameState {
     chaosMode: false,
     writersRoomMode: false,
     soundOn: false,
+    seenPrologue: false,
   };
 }
 

@@ -92,6 +92,9 @@ export interface GameState {
   chaosMode: boolean;
   writersRoomMode: boolean;
   soundOn: boolean;
+  /** True once the prologue has been seen (or skipped) — later new games skip
+   *  straight to the first scene; the title's "▸ Prologue" still replays it. */
+  seenPrologue: boolean;
 }
 
 export const DEFAULT_STATS: Stats = {

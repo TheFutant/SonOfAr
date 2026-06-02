@@ -72,11 +72,12 @@ export default function App() {
     playClick(state.soundOn);
     trackEvent("new_game");
     dispatch({ type: "new" });
-    // The prologue plays before the first scene (it's skippable). It fires its
-    // own "prologue" beacon and hands off to "play" when finished/skipped.
+    // First time through, the (skippable) prologue plays before the first scene
+    // and fires its own "prologue" beacon. Once seen/skipped, later new games go
+    // straight to play — the title's "▸ Prologue" still replays it on demand.
     setAfterPrologue("play");
-    setScreen("prologue");
-  }, [state.soundOn]);
+    setScreen(state.seenPrologue ? "play" : "prologue");
+  }, [state.soundOn, state.seenPrologue]);
 
   const onReplayPrologue = useCallback(() => {
     playClick(state.soundOn);
@@ -130,8 +131,14 @@ export default function App() {
         <Prologue
           soundOn={state.soundOn}
           finishLabel={afterPrologue === "play" ? "Begin" : "Done"}
-          onComplete={() => setScreen(afterPrologue)}
-          onSkip={() => setScreen(afterPrologue)}
+          onComplete={() => {
+            dispatch({ type: "set-pref", key: "seenPrologue", value: true });
+            setScreen(afterPrologue);
+          }}
+          onSkip={() => {
+            dispatch({ type: "set-pref", key: "seenPrologue", value: true });
+            setScreen(afterPrologue);
+          }}
         />
       ) : (
         <div className="relative z-10 mx-auto max-w-2xl px-4 pt-safe pb-28">
