@@ -28,6 +28,7 @@ export interface ProloguePanel {
 export const PROLOGUE_PANELS: readonly ProloguePanel[] = [
   {
     id: "ash",
+    art: "/prologue/p1-ash.webp",
     shout: "Ash.",
     caption:
       "A town wakes smelling of burnt sugar and wet drywall and something that wants to be rosemary but isn't. It has smelled this way before.",
@@ -35,6 +36,7 @@ export const PROLOGUE_PANELS: readonly ProloguePanel[] = [
   },
   {
     id: "you",
+    art: "/prologue/p2-you.webp",
     shout: "You.",
     caption:
       "You come to under a ceiling fan that is, mostly, still attached to the ceiling. Your right palm is bandaged. Badly. By you, probably.",
@@ -42,6 +44,7 @@ export const PROLOGUE_PANELS: readonly ProloguePanel[] = [
   },
   {
     id: "the-note",
+    art: "/prologue/p3-note.webp",
     caption:
       "A note is tucked in your cuff, in a hand that punctuates like it means it:\n“You are awake. Try not to make this confusing — we are barely two paragraphs in.”",
     attribution: "— The Editor",
@@ -49,6 +52,7 @@ export const PROLOGUE_PANELS: readonly ProloguePanel[] = [
   },
   {
     id: "three-columns",
+    art: "/prologue/p4-smoke.webp",
     shout: "Three columns of smoke.",
     caption:
       "One past the kitchen window. A closet you don't remember closing. And the floor, which has opinions about where you should be.",
@@ -56,12 +60,14 @@ export const PROLOGUE_PANELS: readonly ProloguePanel[] = [
   },
   {
     id: "the-name",
+    art: "/prologue/p5-name.webp",
     caption:
       "There's a smudge on the wall that almost spells a name. You're not going to read it yet. Three streets over, a dog you'd burn the world to keep is barking at nothing in particular. Her name is Maebie.",
     align: "right",
   },
   {
     id: "punctuate",
+    art: "/prologue/p6-punctuate.webp",
     shout: "Punctuate yourself accordingly.",
     caption: "He never starts the fire. He only uses what is already there.",
     align: "center",
