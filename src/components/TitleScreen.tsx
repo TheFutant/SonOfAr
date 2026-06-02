@@ -100,6 +100,9 @@ export function TitleScreen({
           >
             ▸ Prologue
           </button>
+          <p className="text-[11px] italic text-ash-400/80 text-center">
+            Plays once when you begin — replay the cold-open here anytime.
+          </p>
         </div>
 
         <div className="mt-10 w-full">
